@@ -16,8 +16,19 @@ public class Bolinha {
         this("img/bolinha(1).png", posx, posy, idLocal);
     }
 
+    public boolean clicou() {
+        if (Gdx.input.isTouched()) {
+            float touchX = Gdx.input.getX();
+            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+            return true;
+        }
+        return false;
+    }
+
     public Integer getX(){ return this.posx; }
     public Integer getY(){ return this.posy; }
     public Integer getIdLocal(){ return this.idLocal; }
     public Texture getImg(){ return this.img; }
 }
+

@@ -2,6 +2,8 @@ package com.badlogic.circledemo;
 
 import java.util.ArrayList;
 
+import com.badlogic.circledemo.Bolinha;
+import com.badlogic.circledemo.Locais;
 import com.badlogic.circledemo.Main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,16 +11,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class TelaMenu implements Screen {
+public class Detalhes implements Screen {
     private final Main game;
     private SpriteBatch batch;
     private Texture fundo;
+    private Locais local;
     private ArrayList<Bolinha> bolinhas = new ArrayList<>();
 
-    public TelaMenu(Main game) {
+    public Detalhes(Main game, Integer idLocal) {
         this.game = game;
         batch = new SpriteBatch();
-        fundo = new Texture("img/mapaMenu.jpg");
+        local = new Locais(idLocal);
+        fundo = new Texture(local.getImagens().get(0));
 
         createBolinhas(0);
 
