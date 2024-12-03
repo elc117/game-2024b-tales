@@ -13,22 +13,23 @@ public class Bolinha {
         this.idLocal = idLocal;
     }
     public Bolinha(Integer posx, Integer posy, Integer idLocal){
-        this("img/bolinha(1).png", posx, posy, idLocal);
+        this("bolinha.png", posx, posy, idLocal);
     }
 
-    public boolean clicou() {
-        if (Gdx.input.isTouched()) {
-            float touchX = Gdx.input.getX();
-            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY();
-
-            return true;
-        }
-        return false;
+    public boolean clicou(){
+        // if (Gdx.input.getX()>=this.posx && Gdx.input.getX()<=this.posx+50 && Gdx.input.getY()>=this.posy &&Gdx.input.getY()<=this.posy+50) {
+		// 	return true;
+		// }
+        return true;
+        // return false;
     }
 
     public Integer getX(){ return this.posx; }
     public Integer getY(){ return this.posy; }
     public Integer getIdLocal(){ return this.idLocal; }
     public Texture getImg(){ return this.img; }
-}
 
+    public void dispose(){
+        img.dispose();
+    }
+}
