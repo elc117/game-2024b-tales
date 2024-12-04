@@ -16,12 +16,11 @@ public class Bolinha {
         this("bolinha.png", posx, posy, idLocal);
     }
 
-    public boolean clicou(){
-        // if (Gdx.input.getX()>=this.posx && Gdx.input.getX()<=this.posx+50 && Gdx.input.getY()>=this.posy &&Gdx.input.getY()<=this.posy+50) {
-		// 	return true;
-		// }
-        return true;
-        // return false;
+    public boolean clicou(float x, float y){
+        if(x>=posx && x<=posx+50 && y>=posy && y<=posy+50){
+            return true;
+        }
+        return false;
     }
 
     public Integer getX(){ return this.posx; }

@@ -1,7 +1,11 @@
 package com.badlogic.circledemo;
 
 import java.util.Iterator;
+import java.util.List;
 
+import javax.swing.Box;
+
+import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -18,11 +22,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
-public class GameScreen implements Screen {
+public class DetalhesScreen implements Screen {
 	final Main game;
 	
 	Texture fundoImage;
-	Array<Bolinha> bolinhas;
+    Locais local;
+	Botao btSelec, btVoltar;
 
 
 	// Texture dropImage;
@@ -37,11 +42,15 @@ public class GameScreen implements Screen {
 	// long lastDropTime;
 	// int dropsGathered;
 	
-	public GameScreen(final Main passed_game, int vezP) {
+	public DetalhesScreen(final Main passed_game, int vezP, int idLocal) {
 		game = passed_game; 
+		local = new Locais(idLocal);
 		
 		// Load images, 64px each
-		fundoImage = new Texture(Gdx.files.internal("mapaMenu.jpg"));
+		fundoImage = new Texture(Gdx.files.internal(local.getImagens().get(0)));
+
+		btSelec = new Botao(0, 100, 200);
+		btVoltar = new Botao(1, 800, 200);
 		// dropImage = new Texture(Gdx.files.internal("droplet.png"));
 		// bucketImage = new Texture(Gdx.files.internal("bucket.png"));
 		
@@ -70,8 +79,6 @@ public class GameScreen implements Screen {
 		// raindrops = new Array<Rectangle>();
 		// spawnRaindrop();
 
-		bolinhas = new Array<Bolinha>();
-		createBolinhas();
 	}
 
 	@Override
@@ -85,10 +92,10 @@ public class GameScreen implements Screen {
 		
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
-		game.batch.draw(fundoImage, 250, 0);
-		for (Bolinha b : bolinhas) {
-			game.batch.draw(b.getImg(), b.getX(), b.getY());
-		}
+		game.batch.draw(fundoImage, 0, 200, 1600, 637);
+		game.batch.draw(btSelec.getImg(), btSelec.getPosx(), btSelec.getPosy());
+		game.batch.draw(btVoltar.getImg(), btVoltar.getPosx(), btVoltar.getPosy());
+		
 		game.batch.end();
 
 		// // Process any user input
@@ -103,11 +110,13 @@ public class GameScreen implements Screen {
 		if (Gdx.input.isTouched()) {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
-			for (Bolinha b : bolinhas) {
-				if(b.clicou(touchPos.x, touchPos.y)){
-					game.setScreen(new DetalhesScreen(game, 0, b.getIdLocal()));
-					dispose();
-				}
+			if(btSelec.clicou(touchPos.x, touchPos.y)){
+				game.setScreen(new TelaMenu(game));
+				dispose();
+			}
+			else if(btVoltar.clicou(touchPos.x, touchPos.y)){
+				game.setScreen(new GameScreen(game, 0));
+				dispose();
 			}
 		}
 		
@@ -140,15 +149,6 @@ public class GameScreen implements Screen {
 		// }
 	}
 
-	private void createBolinhas(){
-		Bolinha bolinha;
-		bolinha = new Bolinha(725, 425, 1); // Quarta Colônia
-		this.bolinhas.add(bolinha);
-		bolinha = new Bolinha(625, 600, 2); // Missões
-		this.bolinhas.add(bolinha);
-		bolinha = new Bolinha(1125, 525, 3); // Torres
-		this.bolinhas.add(bolinha);
-	}
 	
 	@Override
 	public void dispose() {

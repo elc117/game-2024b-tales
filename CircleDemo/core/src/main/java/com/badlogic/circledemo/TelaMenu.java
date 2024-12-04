@@ -2,6 +2,8 @@ package com.badlogic.circledemo;
 
 import java.util.Iterator;
 
+import com.badlogic.circledemo.GameScreen;
+import com.badlogic.circledemo.Main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -20,8 +22,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class TelaMenu implements Screen {
 	final Main game;
-	static private int WIDTH = 800;
-	static private int HEIGHT = 480;
+	static private int WIDTH = 1600;
+	static private int HEIGHT = 837;
 	
 	OrthographicCamera camera;
 	
