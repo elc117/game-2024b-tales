@@ -2,6 +2,7 @@ package com.badlogic.circledemo;
 
 import java.util.Iterator;
 
+import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -18,27 +19,32 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
+
 public class GameScreen implements Screen {
 	final Main game;
 	
 	Texture fundoImage;
 	Array<Bolinha> bolinhas;
+	// Avatar av1, av2;
 
+	// int vezP;
+
+	OrthographicCamera camera;
+	SpriteBatch batch;
+	Vector3 touchPos;
 
 	// Texture dropImage;
 	// Texture bucketImage;
 	// Sound dropSound;
 	// Music rainMusic;
-	OrthographicCamera camera;
-	SpriteBatch batch;
 	// Rectangle bucket;
-	Vector3 touchPos;
 	// Array<Rectangle> raindrops;
 	// long lastDropTime;
 	// int dropsGathered;
 	
 	public GameScreen(final Main passed_game, int vezP) {
 		game = passed_game; 
+		// this.vezP = vezP;
 		
 		// Load images, 64px each
 		fundoImage = new Texture(Gdx.files.internal("mapaMenu.jpg"));
@@ -52,6 +58,9 @@ public class GameScreen implements Screen {
 		// Start playback of music in bg
 		// rainMusic.setLooping(true);
 		// rainMusic.play();
+
+		// av1 = new Avatar(true);
+		// av2 = new Avatar(false);
 		
 		// Init the camera objects.
 		camera = new OrthographicCamera();
@@ -81,11 +90,23 @@ public class GameScreen implements Screen {
 		 */
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		camera.update();
-		
+		// if(this.vezP == 0){
+			// av2.setFrameIni();
+		// av1.update();
+		// }
+		// else if(this.vezP == 1){
+			// av1.setFrameIni();
+		// av2.update();
+		// }
+
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 		game.batch.draw(fundoImage, 250, 0);
+		// game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
+		// game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
+
 		for (Bolinha b : bolinhas) {
 			game.batch.draw(b.getImg(), b.getX(), b.getY());
 		}

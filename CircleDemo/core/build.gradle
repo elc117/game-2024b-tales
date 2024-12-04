@@ -8,9 +8,8 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
     implementation 'com.google.gwt:gwt-user:2.10.0'
     implementation 'com.google.gwt:gwt-dev:2.10.0'
-    implementation 'org.json:json:20230227'
-     implementation 'com.google.gwt:gwt-user:2.9.0'
-    implementation 'com.google.gwt:gwt-dev:2.9.0'
+    // implementation 'com.google.gwt:gwt-user:2.9.0'
+    // implementation 'com.google.gwt:gwt-dev:2.9.0'
 }
 
 sourceSets {

@@ -28,22 +28,17 @@ public class DetalhesScreen implements Screen {
 	Texture fundoImage;
     Locais local;
 	Botao btSelec, btVoltar;
+	// Avatar av1, av2;
+	// int vezP;
 
-
-	// Texture dropImage;
-	// Texture bucketImage;
-	// Sound dropSound;
-	// Music rainMusic;
 	OrthographicCamera camera;
 	SpriteBatch batch;
-	// Rectangle bucket;
 	Vector3 touchPos;
-	// Array<Rectangle> raindrops;
-	// long lastDropTime;
-	// int dropsGathered;
 	
 	public DetalhesScreen(final Main passed_game, int vezP, int idLocal) {
 		game = passed_game; 
+		// this.vezP = vezP;
+
 		local = new Locais(idLocal);
 		
 		// Load images, 64px each
@@ -51,16 +46,9 @@ public class DetalhesScreen implements Screen {
 
 		btSelec = new Botao(0, 100, 200);
 		btVoltar = new Botao(1, 800, 200);
-		// dropImage = new Texture(Gdx.files.internal("droplet.png"));
-		// bucketImage = new Texture(Gdx.files.internal("bucket.png"));
-		
-		// Load the drop sfx and the rain background music
-		// dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
-		// rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-		
-		// Start playback of music in bg
-		// rainMusic.setLooping(true);
-		// rainMusic.play();
+
+		// av1 = new Avatar(true);
+		// av2 = new Avatar(false);
 		
 		// Init the camera objects.
 		camera = new OrthographicCamera();
@@ -69,16 +57,6 @@ public class DetalhesScreen implements Screen {
 		
 		batch = new SpriteBatch();
 		
-		// bucket = new Rectangle();
-		// bucket.width = 64;
-		// bucket.x = 800 / 2 - bucket.width / 2;
-		// bucket.y = 20;
-		// bucket.height = 64;
-		
-		// Create Raindrops and spawn the first one.
-		// raindrops = new Array<Rectangle>();
-		// spawnRaindrop();
-
 	}
 
 	@Override
@@ -88,13 +66,25 @@ public class DetalhesScreen implements Screen {
 		 */
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		camera.update();
 		
+		camera.update();
+		// if(this.vezP == 0){
+		// 	av2.setFrameIni();
+		// 	// av1.update();
+		// }
+		// else if(this.vezP == 1){
+		// 	av1.setFrameIni();
+		// 	// av2.update();
+		// }
+
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
+
 		game.batch.draw(fundoImage, 0, 200, 1600, 637);
 		game.batch.draw(btSelec.getImg(), btSelec.getPosx(), btSelec.getPosy());
 		game.batch.draw(btVoltar.getImg(), btVoltar.getPosx(), btVoltar.getPosy());
+		// game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
+		// game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 		
 		game.batch.end();
 
@@ -111,8 +101,16 @@ public class DetalhesScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 			if(btSelec.clicou(touchPos.x, touchPos.y)){
-				game.setScreen(new TelaMenu(game));
-				dispose();
+				// if(this.vezP <2){
+					game.setScreen(new GameScreen(game, 1));
+					dispose();
+				// }
+				// else{
+				// 	// TODO: TELA BATALHA
+				// 	game.setScreen(new TelaMenu(game));
+				// 	dispose();
+				// }
+				
 			}
 			else if(btVoltar.clicou(touchPos.x, touchPos.y)){
 				game.setScreen(new GameScreen(game, 0));
