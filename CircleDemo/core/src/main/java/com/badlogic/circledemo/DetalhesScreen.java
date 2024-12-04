@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 
+
 public class DetalhesScreen implements Screen {
 	final Main game;
 	GameData gameData;
@@ -37,9 +38,9 @@ public class DetalhesScreen implements Screen {
 	SpriteBatch batch;
 	Vector3 touchPos;
 	
-	public DetalhesScreen(final Main passed_game, int vezP, int idLocal, GameData gameData) {
+	public DetalhesScreen(final Main passed_game, int idLocal, GameData gameData) {
 		game = passed_game; 
-		this.vezP = vezP;
+		this.vezP = gameData.getVez();
 		this.gameData = gameData;
 
 		local = new Locais(idLocal);
@@ -107,13 +108,15 @@ public class DetalhesScreen implements Screen {
 				if(this.vezP == 0){
 					av1.setPersonagem(local.getPersonagem());
 					gameData.setAvatar(av1, true, local.getPersonagem());
-					game.setScreen(new GameScreen(game, 1, gameData));
+					gameData.passaVez();
+					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(0), gameData));
 					dispose();
 				}
 				else if (this.vezP == 1){
 					av2.setPersonagem(local.getPersonagem());
 					gameData.setAvatar(av2, false, local.getPersonagem());
-					game.setScreen(new GameScreen(game, 2, gameData));
+					gameData.passaVez();
+					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(0), gameData));
 					dispose();
 				}
 				else{
@@ -124,7 +127,7 @@ public class DetalhesScreen implements Screen {
 				
 			}
 			else if(btVoltar.clicou(touchPos.x, touchPos.y)){
-				game.setScreen(new GameScreen(game, 0, gameData));
+				game.setScreen(new GameScreen(game, gameData));
 				dispose();
 			}
 		}

@@ -51,7 +51,7 @@ public class TelaMenu implements Screen {
 		
 		// If player activates the game, dispose of this menu.
 		if (Gdx.input.isTouched()) {
-			game.setScreen(new GameScreen(game, 0, gameData));
+			game.setScreen(new GameScreen(game, gameData));
 			dispose();
 		}
 	}

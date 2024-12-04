@@ -43,9 +43,9 @@ public class GameScreen implements Screen {
 	// long lastDropTime;
 	// int dropsGathered;
 	
-	public GameScreen(final Main passed_game, int vezP, GameData gameData) {
+	public GameScreen(final Main passed_game, GameData gameData) {
 		game = passed_game; 
-		this.vezP = vezP;
+		this.vezP = gameData.getVez();;
 		this.gameData = gameData;
 		
 		// Load images, 64px each
@@ -128,7 +128,7 @@ public class GameScreen implements Screen {
 			camera.unproject(touchPos);
 			for (Bolinha b : bolinhas) {
 				if(b.clicou(touchPos.x, touchPos.y)){
-					game.setScreen(new DetalhesScreen(game, this.vezP, b.getIdLocal(), gameData));
+					game.setScreen(new DetalhesScreen(game, b.getIdLocal(), gameData));
 					dispose();
 				}
 			}
