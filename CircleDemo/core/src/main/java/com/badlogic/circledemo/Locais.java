@@ -43,7 +43,7 @@ public class Locais {
                 this.nome = "Torres";
                 img = "Torres.jpg";
                 this.imagens.add(img);
-                this.personagem = 1;
+                this.personagem = 2;
                 questao = 1;
                 this.questoes.add(questao);
                 questao = 2;

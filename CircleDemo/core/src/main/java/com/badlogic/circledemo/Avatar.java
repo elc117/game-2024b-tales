@@ -25,15 +25,15 @@ public class Avatar{
         this.animation = new Animation(new TextureRegion(this.img), 2, 30f);
     }
     
-    // public void setPersonagem(Integer id){
-    //     Personagem personagem = new Personagem(id, 0, 0); 
-    //     this.img = personagem.getAvatar();
-    //     this.animation = new Animation(new TextureRegion(this.img), 1, 30f);
-    // }
+    public void setPersonagem(int id){
+        Personagem personagem = new Personagem(id, 0, 0); 
+        this.img = personagem.getAvatar();
+        this.animation = new Animation(new TextureRegion(this.img), 1, 30f);
+    }
 
     public Integer getPosx(){ return this.posx; }
     public Integer getPosy(){ return this.posy; }
-    // public Texture getImg(){ return this.img; }
+    public Texture getImg(){ return this.img; }
     public void update(){ this.animation.update(1); }
     public TextureRegion getFrame(){ return this.animation.getFrame(); }
     public void setFrameIni(){ this.animation.setFrameIni(); }

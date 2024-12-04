@@ -24,12 +24,16 @@ public class TelaMenu implements Screen {
 	static private int HEIGHT = 837;
 	
 	OrthographicCamera camera;
+
+	GameData gameData;
 	
 	public TelaMenu(final Main passed_game) {
 		game = passed_game;
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, WIDTH, HEIGHT);
+
+		gameData = new GameData();
 	}
 	
 	@Override
@@ -47,7 +51,7 @@ public class TelaMenu implements Screen {
 		
 		// If player activates the game, dispose of this menu.
 		if (Gdx.input.isTouched()) {
-			game.setScreen(new GameScreen(game, 0));
+			game.setScreen(new GameScreen(game, 0, gameData));
 			dispose();
 		}
 	}

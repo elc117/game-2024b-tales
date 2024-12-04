@@ -22,8 +22,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
+
 public class DetalhesScreen implements Screen {
 	final Main game;
+	GameData gameData;
 	
 	Texture fundoImage;
     Locais local;
@@ -35,9 +37,10 @@ public class DetalhesScreen implements Screen {
 	SpriteBatch batch;
 	Vector3 touchPos;
 	
-	public DetalhesScreen(final Main passed_game, int vezP, int idLocal) {
+	public DetalhesScreen(final Main passed_game, int vezP, int idLocal, GameData gameData) {
 		game = passed_game; 
 		this.vezP = vezP;
+		this.gameData = gameData;
 
 		local = new Locais(idLocal);
 		
@@ -47,9 +50,9 @@ public class DetalhesScreen implements Screen {
 		btSelec = new Botao(0, 100, 200);
 		btVoltar = new Botao(1, 800, 200);
 
-		av1 = new Avatar(true);
-		av2 = new Avatar(false);
-		
+		av1 = gameData.getAvatar(true);
+		av2 = gameData.getAvatar(false);
+
 		// Init the camera objects.
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1600, 837);
@@ -101,8 +104,16 @@ public class DetalhesScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 			if(btSelec.clicou(touchPos.x, touchPos.y)){
-				if(this.vezP <2){
-					game.setScreen(new GameScreen(game, this.vezP+1));
+				if(this.vezP == 0){
+					av1.setPersonagem(local.getPersonagem());
+					gameData.setAvatar(av1, true, local.getPersonagem());
+					game.setScreen(new GameScreen(game, 1, gameData));
+					dispose();
+				}
+				else if (this.vezP == 1){
+					av2.setPersonagem(local.getPersonagem());
+					gameData.setAvatar(av2, false, local.getPersonagem());
+					game.setScreen(new GameScreen(game, 2, gameData));
 					dispose();
 				}
 				else{
@@ -113,7 +124,7 @@ public class DetalhesScreen implements Screen {
 				
 			}
 			else if(btVoltar.clicou(touchPos.x, touchPos.y)){
-				game.setScreen(new GameScreen(game, 0));
+				game.setScreen(new GameScreen(game, 0, gameData));
 				dispose();
 			}
 		}

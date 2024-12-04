@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen {
 	final Main game;
+	GameData gameData;
 	
 	Texture fundoImage;
 	Array<Bolinha> bolinhas;
@@ -42,9 +43,10 @@ public class GameScreen implements Screen {
 	// long lastDropTime;
 	// int dropsGathered;
 	
-	public GameScreen(final Main passed_game, int vezP) {
+	public GameScreen(final Main passed_game, int vezP, GameData gameData) {
 		game = passed_game; 
 		this.vezP = vezP;
+		this.gameData = gameData;
 		
 		// Load images, 64px each
 		fundoImage = new Texture(Gdx.files.internal("mapaMenu.jpg"));
@@ -59,8 +61,8 @@ public class GameScreen implements Screen {
 		// rainMusic.setLooping(true);
 		// rainMusic.play();
 
-		av1 = new Avatar(true);
-		av2 = new Avatar(false);
+		av1 = gameData.getAvatar(true);
+		av2 = gameData.getAvatar(false);
 		
 		// Init the camera objects.
 		camera = new OrthographicCamera();
@@ -126,7 +128,7 @@ public class GameScreen implements Screen {
 			camera.unproject(touchPos);
 			for (Bolinha b : bolinhas) {
 				if(b.clicou(touchPos.x, touchPos.y)){
-					game.setScreen(new DetalhesScreen(game, this.vezP, b.getIdLocal()));
+					game.setScreen(new DetalhesScreen(game, this.vezP, b.getIdLocal(), gameData));
 					dispose();
 				}
 			}
