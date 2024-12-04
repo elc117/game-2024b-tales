@@ -28,8 +28,8 @@ public class DetalhesScreen implements Screen {
 	Texture fundoImage;
     Locais local;
 	Botao btSelec, btVoltar;
-	// Avatar av1, av2;
-	// int vezP;
+	Avatar av1, av2;
+	int vezP;
 
 	OrthographicCamera camera;
 	SpriteBatch batch;
@@ -37,7 +37,7 @@ public class DetalhesScreen implements Screen {
 	
 	public DetalhesScreen(final Main passed_game, int vezP, int idLocal) {
 		game = passed_game; 
-		// this.vezP = vezP;
+		this.vezP = vezP;
 
 		local = new Locais(idLocal);
 		
@@ -47,8 +47,8 @@ public class DetalhesScreen implements Screen {
 		btSelec = new Botao(0, 100, 200);
 		btVoltar = new Botao(1, 800, 200);
 
-		// av1 = new Avatar(true);
-		// av2 = new Avatar(false);
+		av1 = new Avatar(true);
+		av2 = new Avatar(false);
 		
 		// Init the camera objects.
 		camera = new OrthographicCamera();
@@ -68,14 +68,14 @@ public class DetalhesScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		camera.update();
-		// if(this.vezP == 0){
-		// 	av2.setFrameIni();
-		// 	// av1.update();
-		// }
-		// else if(this.vezP == 1){
-		// 	av1.setFrameIni();
-		// 	// av2.update();
-		// }
+		if(this.vezP == 0){
+			av2.setFrameIni();
+			av1.update();
+		}
+		else if(this.vezP == 1){
+			av1.setFrameIni();
+			av2.update();
+		}
 
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
@@ -83,8 +83,8 @@ public class DetalhesScreen implements Screen {
 		game.batch.draw(fundoImage, 0, 200, 1600, 637);
 		game.batch.draw(btSelec.getImg(), btSelec.getPosx(), btSelec.getPosy());
 		game.batch.draw(btVoltar.getImg(), btVoltar.getPosx(), btVoltar.getPosy());
-		// game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
-		// game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
+		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
+		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 		
 		game.batch.end();
 
@@ -101,15 +101,15 @@ public class DetalhesScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 			if(btSelec.clicou(touchPos.x, touchPos.y)){
-				// if(this.vezP <2){
-					game.setScreen(new GameScreen(game, 1));
+				if(this.vezP <2){
+					game.setScreen(new GameScreen(game, this.vezP+1));
 					dispose();
-				// }
-				// else{
-				// 	// TODO: TELA BATALHA
-				// 	game.setScreen(new TelaMenu(game));
-				// 	dispose();
-				// }
+				}
+				else{
+					// TODO: TELA BATALHA
+					game.setScreen(new TelaMenu(game));
+					dispose();
+				}
 				
 			}
 			else if(btVoltar.clicou(touchPos.x, touchPos.y)){

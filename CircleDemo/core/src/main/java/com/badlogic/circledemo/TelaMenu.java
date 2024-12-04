@@ -2,8 +2,6 @@ package com.badlogic.circledemo;
 
 import java.util.Iterator;
 
-import com.badlogic.circledemo.GameScreen;
-import com.badlogic.circledemo.Main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
