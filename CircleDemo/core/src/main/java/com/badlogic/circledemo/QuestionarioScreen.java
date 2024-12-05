@@ -116,7 +116,7 @@ public class QuestionarioScreen implements Screen {
 						}
 						else if(this.vezP == 1){
 							av2.setPersonagem(gameData.getLocal().getPersonagem());
-							gameData.setAvatar(av2, true, gameData.getLocal().getPersonagem());
+							gameData.setAvatar(av2, false, gameData.getLocal().getPersonagem());
 						}
 						gameData.passaVez();
 						game.setScreen(new GameScreen(game, gameData));

@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 
-
 public class DetalhesScreen implements Screen {
 	final Main game;
 	GameData gameData;
@@ -117,7 +116,7 @@ public class DetalhesScreen implements Screen {
 				}
 				else{
 					// TODO: TELA BATALHA
-					game.setScreen(new TelaMenu(game));
+					game.setScreen(new PvpScreen(game, gameData));
 					dispose();
 				}
 				
