@@ -1,7 +1,6 @@
 package com.badlogic.circledemo;
 
 import com.badlogic.gdx.utils.Array;
-
 import com.badlogic.circledemo.Animation;
 import com.badlogic.circledemo.Quadrado;
 import com.badlogic.gdx.Gdx;
@@ -25,6 +24,7 @@ public class Personagem {
     public Personagem(int id, float posx, float posy) {
         this.posx = posx;
         this.posy = posy;
+        Texture t;
         switch (id) {
             case 1:
                 this.tamx = 742;
@@ -32,7 +32,10 @@ public class Personagem {
                 this.img1 = new String("Bagualossauro1-g.png");
                 this.imgAva = new String("P1Bag.png");
 
+                t = new Texture(Gdx.files.internal(img1));
+
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
+                this.animation = new Animation(new TextureRegion(t), 2, 10f);
                 break;
             case 2:
                 this.tamx = 742;
@@ -40,7 +43,10 @@ public class Personagem {
                 this.img1 = new String("Bagualossauro2-g.png");
                 this.imgAva = new String("P1BagGaucho.png");
 
+                t = new Texture(Gdx.files.internal(img1));
+
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
+                this.animation = new Animation(new TextureRegion(t), 2, 10f);
                 break;
             default:
                 break;
@@ -51,19 +57,32 @@ public class Personagem {
         this.listMoves = listMoves;
     }
 
-    public void processMove(Integer move){
-        if (move.equals(this.listMoves.get(0))) {
+    public void processMove(){
+		if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
             changeEsq();
-        } 
-        else if (move.equals(this.listMoves.get(1))){
+        }
+        else if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
             changeDir();
         }
-        else if (move.equals(this.listMoves.get(2))){
+        else if (Gdx.input.isKeyPressed(this.listMoves.get(2))){
             jump();
         }
-        else if (move.equals(this.listMoves.get(3))){
+        else if (Gdx.input.isKeyPressed(this.listMoves.get(3))){
             atack();
         }
+
+        // if (move.equals(this.listMoves.get(0))) {
+        //     changeEsq();
+        // } 
+        // else if (move.equals(this.listMoves.get(1))){
+        //     changeDir();
+        // }
+        // else if (move.equals(this.listMoves.get(2))){
+        //     jump();
+        // }
+        // else if (move.equals(this.listMoves.get(3))){
+        //     atack();
+        // }
     }
 
     public void move(Personagem outro){
@@ -152,7 +171,7 @@ public class Personagem {
         }
         return this.whereG;
     }
-    private void changeEsq(){
+    public void changeEsq(){
         if(this.esq == 0){
             this.esq = 1;
         }
@@ -160,7 +179,7 @@ public class Personagem {
             this.esq = 0;
         }
     }
-    private void changeDir(){
+    public void changeDir(){
         if(this.dir == 0){
             this.dir = 1;
         }

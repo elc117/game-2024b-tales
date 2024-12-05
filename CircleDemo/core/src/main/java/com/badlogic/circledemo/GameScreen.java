@@ -136,7 +136,15 @@ public class GameScreen implements Screen {
 		}
 		
 		// // Ensure that the bucket's within the screen bounds
-		// if (Gdx.input.isKeyPressed(Keys.LEFT)) 
+		if (Gdx.input.isKeyPressed(Keys.J)){
+			gameData.setLocal(1);
+			Avatar a = new Avatar(true);
+			Avatar b = new Avatar(false);
+			gameData.setAvatar(a, true, 1);
+			gameData.setAvatar(b, false, 2);
+			game.setScreen(new PvpScreen(game, gameData));
+			dispose();
+		}
 		// 	bucket.x -= 200 * Gdx.graphics.getDeltaTime();
 		// if (Gdx.input.isKeyPressed(Keys.RIGHT)) 
 		// 	bucket.x += 200 * Gdx.graphics.getDeltaTime();

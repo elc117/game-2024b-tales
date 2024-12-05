@@ -35,6 +35,7 @@ public class GameData {
     public Locais getLocal(){ return this.local; }
 
     public void passaVez(){
-        this.vezP ++;
+        if(this.vezP <= 2) this.vezP ++;
+        else this.vezP = 0;
     }
 }

@@ -115,7 +115,8 @@ public class DetalhesScreen implements Screen {
 					dispose();
 				}
 				else{
-					// TODO: TELA BATALHA
+					gameData.setLocal(local.getId());
+					gameData.passaVez();
 					game.setScreen(new PvpScreen(game, gameData));
 					dispose();
 				}

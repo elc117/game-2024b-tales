@@ -1,5 +1,6 @@
 package com.badlogic.circledemo;
 
+import java.security.Key;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -18,13 +19,16 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+
+
 public class PvpScreen implements Screen {
     final Main game;
 	GameData gameData;
 
 	Texture fundoImage;
 	Avatar av1, av2;
-	Personagem p1, p2;
+	Personagem p1 = new Personagem(0, 0, 0); 
+	Personagem p2 = new Personagem(0, 0, 0);
 
     OrthographicCamera camera;
 	SpriteBatch batch;
@@ -41,8 +45,6 @@ public class PvpScreen implements Screen {
 		p2 = av2.getPersonagem();
 
         fundoImage = new Texture(Gdx.files.internal(this.gameData.getLocal().getImagens().get(0)));
-
-        // fundoImage = this.gameData.getLocal().getImagens().get(0);
 
         // Init the camera objects.
 		camera = new OrthographicCamera();
@@ -68,10 +70,20 @@ public class PvpScreen implements Screen {
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 
-		// game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy());
+		game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy());
+		game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy());
 		
 		game.batch.end();
 
+		// Ensure that the bucket's within the screen bounds
+		if (Gdx.input.isKeyPressed(Keys.W)){
+            p1.jump();
+        }
+		// p1.processMove();
+		// p2.processMove();
+
+		p1.move(p2);
+		// p2.move(p1);
 	}
 
 	
