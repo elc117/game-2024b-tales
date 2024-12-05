@@ -20,7 +20,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 
-
 public class PvpScreen implements Screen {
     final Main game;
 	GameData gameData;
@@ -70,20 +69,62 @@ public class PvpScreen implements Screen {
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 
-		game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy());
-		game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy());
+		// if (p1.whereGo() == 1) {
+        //     game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy(), p1.getTamx(), p1.getTamy());
+        // } else {
+        //     game.batch.draw(p1.getFrame(), 
+        //                p1.getPosx() + p1.getTamx(), // Ajusta a posição para espelhar
+        //                p1.getPosy(), 
+        //                -p1.getTamx(), // Largura negativa espelha no eixo Y
+        //                p1.getTamy());
+        // }
+		// if (p2.whereGo() == 1) {
+        //     game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy(), p2.getTamx(), p2.getTamy());
+        // } else {
+        //     game.batch.draw(p2.getFrame(), 
+        //                p2.getPosx() + p2.getTamx(), // Ajusta a posição para espelhar
+        //                p2.getPosy(), 
+        //                -p2.getTamx(), // Largura negativa espelha no eixo Y
+        //                p2.getTamy());
+        // }
+
+		game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy(), p1.getTamx(), p1.getTamy());
+		game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy(), p2.getTamx(), p2.getTamy());
 		
 		game.batch.end();
 
 		// Ensure that the bucket's within the screen bounds
-		if (Gdx.input.isKeyPressed(Keys.W)){
-            p1.jump();
-        }
-		// p1.processMove();
-		// p2.processMove();
+		// p1.gravity();
+		// if (Gdx.input.isKeyPressed(Keys.A)){
+        //     p1.move_esq();
+        // }
+		// if (Gdx.input.isKeyPressed(Keys.D)){
+        //     p1.move_dir();
+        // }
+		// if (Gdx.input.isKeyPressed(Keys.W)){
+        //     p1.jump();
+        // }
+		// if (Gdx.input.isKeyPressed(Keys.F)){
+        //     p1.atack();
+        // }
+		// p2.gravity();
+		// if (Gdx.input.isKeyPressed(Keys.LEFT)){
+        //     p2.move_esq();
+        // }
+		// if (Gdx.input.isKeyPressed(Keys.RIGHT)){
+        //     p2.move_dir();
+        // }
+		// if (Gdx.input.isKeyPressed(Keys.UP)){
+        //     p2.jump();
+        // }
+		// if (Gdx.input.isKeyPressed(Keys.L)){
+        //     p2.atack();
+        // }
+		// p1.move();
+		// p2.move();
 
 		p1.move(p2);
-		// p2.move(p1);
+		p2.move(p1);
 	}
 
 	

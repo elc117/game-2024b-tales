@@ -27,8 +27,8 @@ public class Personagem {
         Texture t;
         switch (id) {
             case 1:
-                this.tamx = 742;
-                this.tamy = 350;
+                this.tamx = 600;
+                this.tamy = 300;
                 this.img1 = new String("Bagualossauro1-g.png");
                 this.imgAva = new String("P1Bag.png");
 
@@ -36,10 +36,11 @@ public class Personagem {
 
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
                 this.animation = new Animation(new TextureRegion(t), 2, 10f);
+                this.area = new Quadrado(posx, posy+tamy, posx+tamx, posy);
                 break;
             case 2:
-                this.tamx = 742;
-                this.tamy = 350;
+                this.tamx = 600;
+                this.tamy = 300;
                 this.img1 = new String("Bagualossauro2-g.png");
                 this.imgAva = new String("P1BagGaucho.png");
 
@@ -47,6 +48,7 @@ public class Personagem {
 
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
                 this.animation = new Animation(new TextureRegion(t), 2, 10f);
+                this.area = new Quadrado(posx, posy+tamy, posx+tamx, posy);
                 break;
             default:
                 break;
@@ -57,77 +59,72 @@ public class Personagem {
         this.listMoves = listMoves;
     }
 
-    public void processMove(){
-		if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
-            changeEsq();
-        }
-        else if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
-            changeDir();
-        }
-        else if (Gdx.input.isKeyPressed(this.listMoves.get(2))){
-            jump();
-        }
-        else if (Gdx.input.isKeyPressed(this.listMoves.get(3))){
-            atack();
-        }
-
-        // if (move.equals(this.listMoves.get(0))) {
-        //     changeEsq();
-        // } 
-        // else if (move.equals(this.listMoves.get(1))){
-        //     changeDir();
-        // }
-        // else if (move.equals(this.listMoves.get(2))){
-        //     jump();
-        // }
-        // else if (move.equals(this.listMoves.get(3))){
-        //     atack();
-        // }
-    }
+    // public void processMove(){
+	// 	if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
+    //         changeEsq();
+    //     }
+    //     else if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
+    //         changeDir();
+    //     }
+    //     else if (Gdx.input.isKeyPressed(this.listMoves.get(2))){
+    //         jump();
+    //     }
+    //     else if (Gdx.input.isKeyPressed(this.listMoves.get(3))){
+    //         atack();
+    //     }
+    // }
 
     public void move(Personagem outro){
-        if(this.dir == 1 && this.esq == 1){
-            this.animation.setFrameIni();
+        if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
+            move_esq();
+            this.animation.update(1);
         }
-        else{
-            if(this.esq == 1){
-                this.move_esq();
-                this.animation.update(1);
-            }
-            if(this.dir == 1){
-                this.move_dir();
-                this.animation.update(1);
-            }
+		if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
+            move_dir();
+            this.animation.update(1);
+        }
+		if (Gdx.input.isKeyPressed(this.listMoves.get(2))){
+            jump();
+        }
+		if (Gdx.input.isKeyPressed(this.listMoves.get(3))){
+            atack(outro);
+        }
+        int wg = this.whereG;
+        if(wg != whereGo()){
+            this.animation.flip();
         }
         gravity();
-        this.area.conflito(outro.getArea());
+        
+        // this.area.conflito(outro.getArea());
     }
 
-    private void move_esq(){
+    public void move_esq(){
         this.posx -= 5;
         this.area.moveToEsq(5);
+        this.esq = 1;
         if(this.posx < 0){
-            this.posx = 0;
+            this.posx += 5;
+            this.area.moveToDir(5);
             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
 
-    private void move_dir(){
+    public void move_dir(){
         this.posx += 5;
-        this.area.moveToEsq(5);
-        if(this.posx > 1000){
-            this.posx = 1000;
+        this.area.moveToDir(5);
+        this.dir = 1;
+        if(this.posx > 1100){
+            this.posx -= 5;
+            this.area.moveToEsq(5);
             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
-
     public void jump(){
         if(this.posy == this.posyBase){
             this.dy = 22;
         }
     }
-
-    public void atack(){
+    public void atack(Personagem outro){
         if(this.whereG == 0){
             System.out.println("atacou direita");
         }
@@ -135,8 +132,7 @@ public class Personagem {
             System.out.println("atacou esquerda");
         }
     }
-
-    private void gravity(){
+    public void gravity(){
         this.posy += this.dy;
         this.area.moveToUp(this.dy);
         this.dy -= 0.5;
@@ -147,7 +143,7 @@ public class Personagem {
         }
     }
 
-//     // Getters e Setters
+    // Getters e Setters
     public int getId() { return id; }
     public int getTamx() { return tamx; }
     public int getTamy() { return tamy; }
@@ -160,9 +156,7 @@ public class Personagem {
     public TextureRegion getFrame(){return this.animation.getFrame();}
     public Texture getAvatar(){ return this.avatar; }
     
-    
-
-    private int whereGo(){
+    public int whereGo(){
         if(this.dir == 1 && this.esq == 0){
             this.whereG = 0;
         }
@@ -187,5 +181,4 @@ public class Personagem {
             this.dir = 0;
         }
     }
-
 }

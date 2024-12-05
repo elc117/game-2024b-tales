@@ -46,26 +46,26 @@ public class Avatar{
     public void setPersonagem(int id){
         Array<Integer> moves = new Array<Integer>();
         if(isP1){
-            this.personagem = new Personagem(id, 0, 200); 
+            this.personagem = new Personagem(id, 0, 500); 
             Integer move = Keys.A;
             moves.add(move);
             move = Keys.D;
             moves.add(move);
             move = Keys.W;
             moves.add(move);
-            move = Keys.C;
+            move = Keys.F;
             moves.add(move);
             this.personagem.setMoves(moves);
         }
         else{
-            this.personagem = new Personagem(id, 600, 200); 
+            this.personagem = new Personagem(id, 800, 500); 
             Integer move = Keys.LEFT;
             moves.add(move);
             move = Keys.RIGHT;
             moves.add(move);
             move = Keys.UP;
             moves.add(move);
-            move = Keys.M;
+            move = Keys.L;
             moves.add(move);
             this.personagem.setMoves(moves);
         }
