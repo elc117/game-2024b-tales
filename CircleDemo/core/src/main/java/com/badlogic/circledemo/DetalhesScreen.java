@@ -38,21 +38,20 @@ public class DetalhesScreen implements Screen {
 	SpriteBatch batch;
 	Vector3 touchPos;
 	
-	public DetalhesScreen(final Main passed_game, int idLocal, GameData gameData) {
+	public DetalhesScreen(final Main passed_game, GameData gameData) {
 		game = passed_game; 
 		this.vezP = gameData.getVez();
 		this.gameData = gameData;
 
-		local = new Locais(idLocal);
+		local = this.gameData.getLocal();
+		av1 = this.gameData.getAvatar(true);
+		av2 = this.gameData.getAvatar(false);
 		
 		// Load images, 64px each
 		fundoImage = new Texture(Gdx.files.internal(local.getImagens().get(0)));
 
 		btSelec = new Botao(0, 100, 200);
 		btVoltar = new Botao(1, 800, 200);
-
-		av1 = gameData.getAvatar(true);
-		av2 = gameData.getAvatar(false);
 
 		// Init the camera objects.
 		camera = new OrthographicCamera();
@@ -106,9 +105,6 @@ public class DetalhesScreen implements Screen {
 			camera.unproject(touchPos);
 			if(btSelec.clicou(touchPos.x, touchPos.y)){
 				if(this.vezP == 0){
-					av1.setPersonagem(local.getPersonagem());
-					gameData.setAvatar(av1, true, local.getPersonagem());
-					gameData.passaVez();
 					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(0), gameData));
 					dispose();
 				}

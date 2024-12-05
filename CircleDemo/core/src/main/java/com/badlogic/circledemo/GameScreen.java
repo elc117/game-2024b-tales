@@ -128,7 +128,8 @@ public class GameScreen implements Screen {
 			camera.unproject(touchPos);
 			for (Bolinha b : bolinhas) {
 				if(b.clicou(touchPos.x, touchPos.y)){
-					game.setScreen(new DetalhesScreen(game, b.getIdLocal(), gameData));
+					gameData.setLocal(b.getIdLocal());
+					game.setScreen(new DetalhesScreen(game, gameData));
 					dispose();
 				}
 			}

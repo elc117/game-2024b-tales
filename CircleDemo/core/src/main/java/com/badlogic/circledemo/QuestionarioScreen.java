@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.Align;
 
 public class QuestionarioScreen implements Screen {
     final Main game;
@@ -26,11 +27,13 @@ public class QuestionarioScreen implements Screen {
     Texture fundoImage;
     Array<Bolinha> bolinhas;
 	Avatar av1, av2;
+	Quiz quiz;
 
 	int vezP;
 
 	OrthographicCamera camera;
 	SpriteBatch batch;
+	BitmapFont font;
 	Vector3 touchPos;
 
     public QuestionarioScreen(final Main passed_game, int idPergunta, GameData gameData){
@@ -43,12 +46,15 @@ public class QuestionarioScreen implements Screen {
         av1 = gameData.getAvatar(true);
 		av2 = gameData.getAvatar(false);
 
+		quiz = new Quiz(idPergunta);
+
         // Init the camera objects.
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1600, 837);
 		touchPos = new Vector3();
 		
 		batch = new SpriteBatch();
+		font = new BitmapFont();
 
         bolinhas = new Array<Bolinha>();
 		createBolinhas();
@@ -75,7 +81,7 @@ public class QuestionarioScreen implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 
-		game.batch.draw(fundoImage, 0, 200, 1600, 637);
+		game.batch.draw(fundoImage, 300, 0, 1000, 837);
 		
         for (Bolinha b : bolinhas) {
 			game.batch.draw(b.getImg(), b.getX(), b.getY());
@@ -83,7 +89,21 @@ public class QuestionarioScreen implements Screen {
 
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
-		
+
+		Array<String> algo = quiz.getPergunta();
+		int i = 100;
+		for (String a : algo) {
+			game.font.draw(game.batch, a, 100, i, 1000, 10, true);
+			i += 100;
+		}
+		// game.font.draw(game.batch, "Somos uma iniciativa da UFSM emaaaaaaaaaaaaa", 100, 500, 2000, 10, true);
+
+		// for(int i=0; i < 4; i++){
+		// 	game.font.draw(game.batch, quiz.getRespostas().get(i), bolinhas.get(i).getX(), bolinhas.get(i).getY());
+		// }
+
+		// game.font.draw(game.batch, "Welcome to Main!!", 100, 150);
+
 		game.batch.end();
 
 		// // Process any user input
@@ -92,8 +112,19 @@ public class QuestionarioScreen implements Screen {
 			camera.unproject(touchPos);
 			for (Bolinha b : bolinhas) {
 				if(b.clicou(touchPos.x, touchPos.y)){
-					game.setScreen(new TelaMenu(game));
-					dispose();
+					if(quiz.isRespostaCorreta(b.getIdLocal())){
+						if(this.vezP == 0){
+							av1.setPersonagem(gameData.getLocal().getPersonagem());
+							gameData.setAvatar(av1, true, gameData.getLocal().getPersonagem());
+						}
+						else if(this.vezP == 1){
+							av2.setPersonagem(gameData.getLocal().getPersonagem());
+							gameData.setAvatar(av2, true, gameData.getLocal().getPersonagem());
+						}
+						gameData.passaVez();
+						game.setScreen(new GameScreen(game, gameData));
+						dispose();
+					}
 				}
 			}
 		}
@@ -103,13 +134,13 @@ public class QuestionarioScreen implements Screen {
 	}
     private void createBolinhas(){
         Bolinha bolinha;
-        bolinha = new Bolinha(470, 100+24, 1); 
+        bolinha = new Bolinha(500, 100+24, 0); 
         this.bolinhas.add(bolinha);
-        bolinha = new Bolinha(470, 206+24, 2); 
+        bolinha = new Bolinha(500, 206+24, 1); 
         this.bolinhas.add(bolinha);
-        bolinha = new Bolinha(470, 313+24, 3); 
+        bolinha = new Bolinha(500, 313+24, 2); 
         this.bolinhas.add(bolinha);
-        bolinha = new Bolinha(470, 421+24, 4); 
+        bolinha = new Bolinha(500, 421+24, 3); 
         this.bolinhas.add(bolinha);
     }
 	

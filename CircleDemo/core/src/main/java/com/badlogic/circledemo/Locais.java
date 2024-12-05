@@ -56,6 +56,52 @@ public class Locais {
         }
     }
 
+    public void mudaLocal(int id){
+        String img = new String();
+        int questao;
+        this.id = id;
+        switch (id) {
+            case 1:
+                this.nome = "Quarta Colônia";
+                img = "QuartaColonia.jpg";
+                this.imagens.add(img);
+                this.personagem = 1;
+                questao = 1;
+                this.questoes.add(questao);
+                questao = 2;
+                this.questoes.add(questao);
+                questao = 3;
+                this.questoes.add(questao);
+                break;
+            case 2:
+                this.nome = "Missoes";
+                img = "Missoes.jpg";
+                this.imagens.add(img);
+                this.personagem = 1;
+                questao = 1;
+                this.questoes.add(questao);
+                questao = 2;
+                this.questoes.add(questao);
+                questao = 3;
+                this.questoes.add(questao);
+                break;
+            case 3:
+                this.nome = "Torres";
+                img = "Torres.jpg";
+                this.imagens.add(img);
+                this.personagem = 2;
+                questao = 1;
+                this.questoes.add(questao);
+                questao = 2;
+                this.questoes.add(questao);
+                questao = 3;
+                this.questoes.add(questao);
+                break;
+            default:
+                break;
+        }
+    }
+
     // Getters e Setters
     public String getNome() {
         return nome;
