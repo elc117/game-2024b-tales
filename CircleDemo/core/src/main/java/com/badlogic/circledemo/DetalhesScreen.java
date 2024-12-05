@@ -2,6 +2,7 @@ package com.badlogic.circledemo;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.Box;
 
@@ -104,15 +105,14 @@ public class DetalhesScreen implements Screen {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 			if(btSelec.clicou(touchPos.x, touchPos.y)){
+				int random = new Random().nextInt(local.getQuestoes().size);
+
 				if(this.vezP == 0){
-					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(0), gameData));
+					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(random), gameData));
 					dispose();
 				}
 				else if (this.vezP == 1){
-					av2.setPersonagem(local.getPersonagem());
-					gameData.setAvatar(av2, false, local.getPersonagem());
-					gameData.passaVez();
-					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(0), gameData));
+					game.setScreen(new QuestionarioScreen(game, local.getQuestoes().get(random), gameData));
 					dispose();
 				}
 				else{
@@ -162,6 +162,10 @@ public class DetalhesScreen implements Screen {
 	public void dispose() {
 		// Clear all the "native" resources
 		fundoImage.dispose();
+		// av1.dispose();
+		// av2.dispose();
+		btSelec.dispose();
+		btVoltar.dispose();
 		// dropImage.dispose();
 		// bucketImage.dispose();
 		// dropSound.dispose();

@@ -43,4 +43,7 @@ public class Botao {
     public Integer getPosy() { return this.posy; }
     public Integer getTamx() { return this.tamx; }
     public Integer getTamy() { return this.tamy; }
+    public void dispose(){
+        img.dispose();
+    }
 }

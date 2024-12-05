@@ -178,6 +178,8 @@ public class GameScreen implements Screen {
 	public void dispose() {
 		// Clear all the "native" resources
 		fundoImage.dispose();
+		// av1.dispose();
+		// av2.dispose();
 		// dropImage.dispose();
 		// bucketImage.dispose();
 		// dropSound.dispose();

@@ -37,4 +37,7 @@ public class Avatar{
     public void update(){ this.animation.update(1); }
     public TextureRegion getFrame(){ return this.animation.getFrame(); }
     public void setFrameIni(){ this.animation.setFrameIni(); }
+    public void dispose(){
+        this.img.dispose();
+    }
 }

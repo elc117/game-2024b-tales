@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Quiz {
     private int id;
-    private Array<String> pergunta = new Array<String>();
+    private String pergunta = new String();
     private Array<String> respostas = new Array<String>(); // Lista com todas as respostas (correta e erradas)
     private int respostaCorretaIndex; // Índice da resposta correta na lista
 
@@ -14,65 +14,38 @@ public class Quiz {
         this.id = id;
         switch (id) {
             case 1:
-                frase = "Somos uma iniciativa da UFSM em";
-                pergunta.add(frase);
-                frase = "parceria com o Consórcio";
-                pergunta.add(frase);
-                frase = "Intermunicipal de Desenvolvimento";
-                pergunta.add(frase);
-                frase = "Sustentável de uma cidade gaúcha,";
-                pergunta.add(frase);
-                frase = "quem somos?";
-                pergunta.add(frase);
-                frase = "Geoparque Quarta Colônia";
+                pergunta = "p1.png";
+                frase = "q1.png";
                 respostas.add(frase);
-                frase = "Sete Povos das Missões";
+                frase = "q2.png";
                 respostas.add(frase);
-                frase = "Praia de Torres";
+                frase = "q2.png";
                 respostas.add(frase);
-                frase = "Resposta Errada 3";
+                frase = "q2.png";
                 respostas.add(frase);
                 respostaCorretaIndex = 0;
                 break;
             case 2:
-                frase = "Somos uma iniciativa da UFSM em";
-                pergunta.add(frase);
-                frase = "parceria com o Consórcio";
-                pergunta.add(frase);
-                frase = "Intermunicipal de Desenvolvimento";
-                pergunta.add(frase);
-                frase = "Sustentável de uma cidade gaúcha,";
-                pergunta.add(frase);
-                frase = "quem somos?";
-                pergunta.add(frase);
-                frase = "Geoparque Quarta Colônia";
+                pergunta = "p2.png";
+                frase = "q2.png";
                 respostas.add(frase);
-                frase = "Sete Povos das Missões";
+                frase = "q2.png";
                 respostas.add(frase);
-                frase = "Praia de Torres";
+                frase = "q1.png";
                 respostas.add(frase);
-                frase = "Resposta Errada 3";
+                frase = "q2.png";
                 respostas.add(frase);
-                respostaCorretaIndex = 0;
+                respostaCorretaIndex = 2;
                 break;
             case 3:
-                frase = "Somos uma iniciativa da UFSM em";
-                pergunta.add(frase);
-                frase = "parceria com o Consórcio";
-                pergunta.add(frase);
-                frase = "Intermunicipal de Desenvolvimento";
-                pergunta.add(frase);
-                frase = "Sustentável de uma cidade gaúcha,";
-                pergunta.add(frase);
-                frase = "quem somos?";
-                pergunta.add(frase);
-                frase = "Geoparque Quarta Colônia";
+                pergunta = "p1.png";
+                frase = "q1.png";
                 respostas.add(frase);
-                frase = "Sete Povos das Missões";
+                frase = "q2.png";
                 respostas.add(frase);
-                frase = "Praia de Torres";
+                frase = "q2.png";
                 respostas.add(frase);
-                frase = "Resposta Errada 3";
+                frase = "q2.png";
                 respostas.add(frase);
                 respostaCorretaIndex = 0;
                 break;
@@ -86,7 +59,7 @@ public class Quiz {
         return id;
     }
 
-    public Array<String> getPergunta() {
+    public String getPergunta() {
         return pergunta;
     }
 

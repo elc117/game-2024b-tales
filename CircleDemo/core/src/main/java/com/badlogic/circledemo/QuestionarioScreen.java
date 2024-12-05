@@ -25,6 +25,7 @@ public class QuestionarioScreen implements Screen {
 	GameData gameData;
 
     Texture fundoImage;
+	Texture pergunta;
     Array<Bolinha> bolinhas;
 	Avatar av1, av2;
 	Quiz quiz;
@@ -33,7 +34,6 @@ public class QuestionarioScreen implements Screen {
 
 	OrthographicCamera camera;
 	SpriteBatch batch;
-	BitmapFont font;
 	Vector3 touchPos;
 
     public QuestionarioScreen(final Main passed_game, int idPergunta, GameData gameData){
@@ -54,7 +54,6 @@ public class QuestionarioScreen implements Screen {
 		touchPos = new Vector3();
 		
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 
         bolinhas = new Array<Bolinha>();
 		createBolinhas();
@@ -90,17 +89,15 @@ public class QuestionarioScreen implements Screen {
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 
-		Array<String> algo = quiz.getPergunta();
-		int i = 100;
-		for (String a : algo) {
-			game.font.draw(game.batch, a, 100, i, 1000, 10, true);
-			i += 100;
-		}
+		pergunta = new Texture(Gdx.files.internal(quiz.getPergunta()));
+		game.batch.draw(pergunta, 450, 480, 700, 200);
+
 		// game.font.draw(game.batch, "Somos uma iniciativa da UFSM emaaaaaaaaaaaaa", 100, 500, 2000, 10, true);
 
-		// for(int i=0; i < 4; i++){
-		// 	game.font.draw(game.batch, quiz.getRespostas().get(i), bolinhas.get(i).getX(), bolinhas.get(i).getY());
-		// }
+		for(int i=0; i < 4; i++){
+			pergunta = new Texture(Gdx.files.internal(quiz.getRespostas().get(i)));
+			game.batch.draw(pergunta, bolinhas.get(i).getX(), bolinhas.get(i).getY()-70, 700, 200);
+		}
 
 		// game.font.draw(game.batch, "Welcome to Main!!", 100, 150);
 
@@ -129,7 +126,6 @@ public class QuestionarioScreen implements Screen {
 			}
 		}
 
-        
 		
 	}
     private void createBolinhas(){
@@ -148,6 +144,12 @@ public class QuestionarioScreen implements Screen {
 	public void dispose() {
 		// Clear all the "native" resources
 		fundoImage.dispose();
+        pergunta.dispose();
+		// av1.dispose();
+		// av2.dispose();
+		// for (Bolinha b : bolinhas) {
+		// 	b.dispose();
+		// }
 		// dropImage.dispose();
 		// bucketImage.dispose();
 		// dropSound.dispose();
