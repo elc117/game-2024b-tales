@@ -42,143 +42,131 @@ public class Personagem {
 
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
                 break;
-            // case 3:
-            //     this.nome = "Torres";
-            //     img = "Torres.jpg";
-            //     this.imagens.add(img);
-            //     this.personagem = 1;
-            //     questao = 1;
-            //     this.questoes.add(questao);
-            //     questao = 2;
-            //     this.questoes.add(questao);
-            //     questao = 3;
-            //     this.questoes.add(questao);
-            //     break;
             default:
                 break;
         }
     }
 
-//     public void setMoves(Array<Integer> listMoves){
-//         this.listMoves = listMoves;
-//     }
+    public void setMoves(Array<Integer> listMoves){
+        this.listMoves = listMoves;
+    }
 
-//     public void processMove(Integer move){
-//         if (move.equals(this.listMoves.get(0))) {
-//             changeEsq();
-//         } 
-//         else if (move.equals(this.listMoves.get(1))){
-//             changeDir();
-//         }
-//         else if (move.equals(this.listMoves.get(2))){
-//             jump();
-//         }
-//         else if (move.equals(this.listMoves.get(3))){
-//             atack();
-//         }
-//     }
+    public void processMove(Integer move){
+        if (move.equals(this.listMoves.get(0))) {
+            changeEsq();
+        } 
+        else if (move.equals(this.listMoves.get(1))){
+            changeDir();
+        }
+        else if (move.equals(this.listMoves.get(2))){
+            jump();
+        }
+        else if (move.equals(this.listMoves.get(3))){
+            atack();
+        }
+    }
 
-//     public void move(Personagem outro){
-//         if(this.dir == 1 && this.esq == 1){
-//             this.animation.setFrameIni();
-//         }
-//         else{
-//             if(this.esq == 1){
-//                 this.move_esq();
-//                 this.animation.update(1);
-//             }
-//             if(this.dir == 1){
-//                 this.move_dir();
-//                 this.animation.update(1);
-//             }
-//         }
-//         gravity();
-//         this.area.conflito(outro.getArea());
-//     }
+    public void move(Personagem outro){
+        if(this.dir == 1 && this.esq == 1){
+            this.animation.setFrameIni();
+        }
+        else{
+            if(this.esq == 1){
+                this.move_esq();
+                this.animation.update(1);
+            }
+            if(this.dir == 1){
+                this.move_dir();
+                this.animation.update(1);
+            }
+        }
+        gravity();
+        this.area.conflito(outro.getArea());
+    }
 
-//     private void move_esq(){
-//         this.posx -= 5;
-//         this.area.moveToEsq(5);
-//         if(this.posx < 0){
-//             this.posx = 0;
-//             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
-//         }
-//     }
+    private void move_esq(){
+        this.posx -= 5;
+        this.area.moveToEsq(5);
+        if(this.posx < 0){
+            this.posx = 0;
+            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
+        }
+    }
 
-//     private void move_dir(){
-//         this.posx += 5;
-//         this.area.moveToEsq(5);
-//         if(this.posx > 1000){
-//             this.posx = 1000;
-//             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
-//         }
-//     }
+    private void move_dir(){
+        this.posx += 5;
+        this.area.moveToEsq(5);
+        if(this.posx > 1000){
+            this.posx = 1000;
+            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
+        }
+    }
 
-//     public void jump(){
-//         if(this.posy == this.posyBase){
-//             this.dy = 22;
-//         }
-//     }
+    public void jump(){
+        if(this.posy == this.posyBase){
+            this.dy = 22;
+        }
+    }
 
-//     public void atack(){
-//         if(this.whereG == 0){
-//             System.out.println("atacou direita");
-//         }
-//         else{
-//             System.out.println("atacou esquerda");
-//         }
-//     }
+    public void atack(){
+        if(this.whereG == 0){
+            System.out.println("atacou direita");
+        }
+        else{
+            System.out.println("atacou esquerda");
+        }
+    }
 
-//     private void gravity(){
-//         this.posy += this.dy;
-//         this.area.moveToUp(this.dy);
-//         this.dy -= 0.5;
-//         if(this.posy < this.posyBase){
-//             this.posy = this.posyBase;
-//             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
-//             this.dy = 0;
-//         }
-//     }
+    private void gravity(){
+        this.posy += this.dy;
+        this.area.moveToUp(this.dy);
+        this.dy -= 0.5;
+        if(this.posy < this.posyBase){
+            this.posy = this.posyBase;
+            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
+            this.dy = 0;
+        }
+    }
 
 //     // Getters e Setters
-//     public int getId() { return id; }
-//     public int getTamx() { return tamx; }
-//     public int getTamy() { return tamy; }
-//     public String getImg1() { return img1; }
+    public int getId() { return id; }
+    public int getTamx() { return tamx; }
+    public int getTamy() { return tamy; }
+    // public String getImg1() { return img1; }
 //     // public String getImg2() { return img2; }
 //     // public Map<String, Ataque> getAtaques() { return ataques; }
-//     public Float getPx() { return this.posx; }
-//     public Float getPy() { return this.posy; }
-//     public Quadrado getArea() { return this.area; }
-//     public TextureRegion getFrame(){return this.animation.getFrame();}
+    public Float getPosx() { return this.posx; }
+    public Float getPosy() { return this.posy; }
+    public Quadrado getArea() { return this.area; }
+    public TextureRegion getFrame(){return this.animation.getFrame();}
     public Texture getAvatar(){ return this.avatar; }
     
     
 
-//     public int whereGo(){
-//         if(this.dir == 1 && this.esq == 0){
-//             this.whereG = 0;
-//         }
-//         else if(this.esq == 1 && this.dir == 0){
-//             this.whereG = 1;
-//         }
-//         return this.whereG;
-//     }
-//     private void changeEsq(){
-//         if(this.esq == 0){
-//             this.esq = 1;
-//         }
-//         else{
-//             this.esq = 0;
-//         }
-//     }
-//     private void changeDir(){
-//         if(this.dir == 0){
-//             this.dir = 1;
-//         }
-//         else{
-//             this.dir = 0;
-//         }
-//     }
+    private int whereGo(){
+        if(this.dir == 1 && this.esq == 0){
+            this.whereG = 0;
+        }
+        else if(this.esq == 1 && this.dir == 0){
+            this.whereG = 1;
+        }
+        return this.whereG;
+    }
+    private void changeEsq(){
+        if(this.esq == 0){
+            this.esq = 1;
+        }
+        else{
+            this.esq = 0;
+        }
+    }
+    private void changeDir(){
+        if(this.dir == 0){
+            this.dir = 1;
+        }
+        else{
+            this.dir = 0;
+        }
+    }
 
 }

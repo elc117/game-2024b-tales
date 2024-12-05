@@ -24,6 +24,7 @@ public class PvpScreen implements Screen {
 
 	Texture fundoImage;
 	Avatar av1, av2;
+	Personagem p1, p2;
 
     OrthographicCamera camera;
 	SpriteBatch batch;
@@ -35,6 +36,9 @@ public class PvpScreen implements Screen {
 
         av1 = this.gameData.getAvatar(true);
 		av2 = this.gameData.getAvatar(false);
+
+		p1 = av1.getPersonagem();
+		p2 = av2.getPersonagem();
 
         fundoImage = new Texture(Gdx.files.internal(this.gameData.getLocal().getImagens().get(0)));
 
@@ -63,6 +67,8 @@ public class PvpScreen implements Screen {
 		game.batch.draw(fundoImage, 0, 200, 1600, 637);
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
+
+		// game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy());
 		
 		game.batch.end();
 

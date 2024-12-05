@@ -8,6 +8,7 @@ public class Avatar{
     private Texture img;
     private Integer idPersonagem, vidaTotal, vidaAtual, posx, posy; 
     private Animation animation;
+    private Personagem personagem;
     
     public Avatar(boolean isP1){
         this.idPersonagem = 0;
@@ -26,7 +27,7 @@ public class Avatar{
     }
     
     public void setPersonagem(int id){
-        Personagem personagem = new Personagem(id, 0, 0); 
+        personagem = new Personagem(id, 0, 0); 
         this.img = personagem.getAvatar();
         this.animation = new Animation(new TextureRegion(this.img), 1, 30f);
     }
@@ -40,4 +41,5 @@ public class Avatar{
     public void dispose(){
         this.img.dispose();
     }
+    public Personagem getPersonagem(){ return this.personagem; }
 }
