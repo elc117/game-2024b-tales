@@ -26,8 +26,8 @@ public class PvpScreen implements Screen {
 
 	Texture fundoImage;
 	Avatar av1, av2;
-	Personagem p1 = new Personagem(0, 0, 0); 
-	Personagem p2 = new Personagem(0, 0, 0);
+	Personagem p1; 
+	Personagem p2;
 
     OrthographicCamera camera;
 	SpriteBatch batch;
@@ -74,35 +74,6 @@ public class PvpScreen implements Screen {
 		
 		game.batch.end();
 
-		// Ensure that the bucket's within the screen bounds
-		// p1.gravity();
-		// if (Gdx.input.isKeyPressed(Keys.A)){
-        //     p1.move_esq();
-        // }
-		// if (Gdx.input.isKeyPressed(Keys.D)){
-        //     p1.move_dir();
-        // }
-		// if (Gdx.input.isKeyPressed(Keys.W)){
-        //     p1.jump();
-        // }
-		// if (Gdx.input.isKeyPressed(Keys.F)){
-        //     p1.atack();
-        // }
-		// p2.gravity();
-		// if (Gdx.input.isKeyPressed(Keys.LEFT)){
-        //     p2.move_esq();
-        // }
-		// if (Gdx.input.isKeyPressed(Keys.RIGHT)){
-        //     p2.move_dir();
-        // }
-		// if (Gdx.input.isKeyPressed(Keys.UP)){
-        //     p2.jump();
-        // }
-		// if (Gdx.input.isKeyPressed(Keys.L)){
-        //     p2.atack();
-        // }
-		// p1.move();
-		// p2.move();
 
 		p1.move(p2);
 		p2.move(p1);
