@@ -69,25 +69,6 @@ public class PvpScreen implements Screen {
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 
-		// if (p1.whereGo() == 1) {
-        //     game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy(), p1.getTamx(), p1.getTamy());
-        // } else {
-        //     game.batch.draw(p1.getFrame(), 
-        //                p1.getPosx() + p1.getTamx(), // Ajusta a posição para espelhar
-        //                p1.getPosy(), 
-        //                -p1.getTamx(), // Largura negativa espelha no eixo Y
-        //                p1.getTamy());
-        // }
-		// if (p2.whereGo() == 1) {
-        //     game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy(), p2.getTamx(), p2.getTamy());
-        // } else {
-        //     game.batch.draw(p2.getFrame(), 
-        //                p2.getPosx() + p2.getTamx(), // Ajusta a posição para espelhar
-        //                p2.getPosy(), 
-        //                -p2.getTamx(), // Largura negativa espelha no eixo Y
-        //                p2.getTamy());
-        // }
-
 		game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy(), p1.getTamx(), p1.getTamy());
 		game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy(), p2.getTamx(), p2.getTamy());
 		

@@ -59,37 +59,34 @@ public class Personagem {
         this.listMoves = listMoves;
     }
 
-    // public void processMove(){
-	// 	if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
-    //         changeEsq();
-    //     }
-    //     else if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
-    //         changeDir();
-    //     }
-    //     else if (Gdx.input.isKeyPressed(this.listMoves.get(2))){
-    //         jump();
-    //     }
-    //     else if (Gdx.input.isKeyPressed(this.listMoves.get(3))){
-    //         atack();
-    //     }
-    // }
 
     public void move(Personagem outro){
+        int wg = this.whereG;
         if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
+            this.esq = 1;
             move_esq();
-            this.animation.update(1);
         }
+        else{
+            this.esq = 0;
+        }
+
 		if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
+            this.dir = 1;
             move_dir();
+        }
+        else{
+            this.dir = 0;
+        }
+        if(this.dir == 1 || this.esq == 1){
             this.animation.update(1);
         }
+
 		if (Gdx.input.isKeyPressed(this.listMoves.get(2))){
             jump();
         }
 		if (Gdx.input.isKeyPressed(this.listMoves.get(3))){
             atack(outro);
         }
-        int wg = this.whereG;
         if(wg != whereGo()){
             this.animation.flip();
         }
@@ -101,7 +98,6 @@ public class Personagem {
     public void move_esq(){
         this.posx -= 5;
         this.area.moveToEsq(5);
-        this.esq = 1;
         if(this.posx < 0){
             this.posx += 5;
             this.area.moveToDir(5);
@@ -112,7 +108,6 @@ public class Personagem {
     public void move_dir(){
         this.posx += 5;
         this.area.moveToDir(5);
-        this.dir = 1;
         if(this.posx > 1100){
             this.posx -= 5;
             this.area.moveToEsq(5);
@@ -158,27 +153,11 @@ public class Personagem {
     
     public int whereGo(){
         if(this.dir == 1 && this.esq == 0){
-            this.whereG = 0;
-        }
-        else if(this.esq == 1 && this.dir == 0){
             this.whereG = 1;
         }
+        else if(this.esq == 1 && this.dir == 0){
+            this.whereG = 0;
+        }
         return this.whereG;
-    }
-    public void changeEsq(){
-        if(this.esq == 0){
-            this.esq = 1;
-        }
-        else{
-            this.esq = 0;
-        }
-    }
-    public void changeDir(){
-        if(this.dir == 0){
-            this.dir = 1;
-        }
-        else{
-            this.dir = 0;
-        }
     }
 }
