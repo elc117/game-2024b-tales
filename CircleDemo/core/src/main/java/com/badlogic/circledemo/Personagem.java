@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Personagem {
     private int id;
     private int tamx, tamy;
+    private int vida, vidaT;
     private int esq = 0, dir = 0, whereG = 0;
+    private int delayAtack = 0, maxAtackDelay = 30;
     private float posx, posy, posyBase; 
     private double dy = 0.0;
     private String img1, imgAva;
@@ -27,6 +29,8 @@ public class Personagem {
         Texture t;
         switch (id) {
             case 1:
+                this.vidaT = 300;
+                this.vida = this.vidaT;
                 this.tamx = 600;
                 this.tamy = 300;
                 this.img1 = new String("Bagualossauro1-g.png");
@@ -39,6 +43,8 @@ public class Personagem {
                 this.area = new Quadrado(posx, posy+tamy, posx+tamx, posy);
                 break;
             case 2:
+                this.vidaT = 300;
+                this.vida = this.vidaT;
                 this.tamx = 600;
                 this.tamy = 300;
                 this.img1 = new String("Bagualossauro2-g.png");
@@ -64,7 +70,7 @@ public class Personagem {
         int wg = this.whereG;
         if (Gdx.input.isKeyPressed(this.listMoves.get(0))){
             this.esq = 1;
-            move_esq();
+            move_esq(5);
         }
         else{
             this.esq = 0;
@@ -72,7 +78,7 @@ public class Personagem {
 
 		if (Gdx.input.isKeyPressed(this.listMoves.get(1))){
             this.dir = 1;
-            move_dir();
+            move_dir(5);
         }
         else{
             this.dir = 0;
@@ -95,22 +101,22 @@ public class Personagem {
         // this.area.conflito(outro.getArea());
     }
 
-    public void move_esq(){
-        this.posx -= 5;
-        this.area.moveToEsq(5);
+    public void move_esq(int d){
+        this.posx -= d;
+        this.area.moveToEsq(d);
         if(this.posx < 0){
-            this.posx += 5;
-            this.area.moveToDir(5);
+            this.posx += d;
+            this.area.moveToDir(d);
             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
 
-    public void move_dir(){
-        this.posx += 5;
-        this.area.moveToDir(5);
+    public void move_dir(int d){
+        this.posx += d;
+        this.area.moveToDir(d);
         if(this.posx > 1100){
-            this.posx -= 5;
-            this.area.moveToEsq(5);
+            this.posx -= d;
+            this.area.moveToEsq(d);
             this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
@@ -119,13 +125,32 @@ public class Personagem {
             this.dy = 22;
         }
     }
+    
+    public void tomaDano(int dano){
+        this.vida -= dano;
+    }
+    
     public void atack(Personagem outro){
-        if(this.whereG == 0){
-            System.out.println("atacou direita");
+        int distanciaMin = this.tamx/2;    
+        int distanciaMax = this.tamx+100; 
+        if(delayAtack == maxAtackDelay){
+            if (this.whereG == 1) { // Ataque à esquerda
+                if (this.posx >= outro.getPosx() - distanciaMax && this.posx <= outro.getPosx() - distanciaMin) {
+                    outro.tomaDano(50);
+                    outro.move_dir(40); // Movimento causado pelo ataque
+                }
+            } else if (this.whereG == 0) { // Ataque à direita
+                if (this.posx <= outro.getPosx() + distanciaMax && this.posx >= outro.getPosx() + distanciaMin) {
+                    outro.tomaDano(50);
+                    outro.move_esq(40); // Movimento causado pelo ataque
+                }
+            }
+            delayAtack = 0;
         }
         else{
-            System.out.println("atacou esquerda");
+            delayAtack++;
         }
+        
     }
     public void gravity(){
         this.posy += this.dy;
@@ -142,6 +167,8 @@ public class Personagem {
     public int getId() { return id; }
     public int getTamx() { return tamx; }
     public int getTamy() { return tamy; }
+    public int getVida() { return vida; }
+    public int getVidaT() { return vidaT; }
     // public String getImg1() { return img1; }
 //     // public String getImg2() { return img2; }
 //     // public Map<String, Ataque> getAtaques() { return ataques; }

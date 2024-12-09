@@ -43,7 +43,7 @@ public class Avatar{
         this.animation = new Animation(new TextureRegion(this.img), 2, 30f);
     }
     
-    public void setPersonagem(int id){
+    public void setPersonagem(int id, boolean acertou){
         Array<Integer> moves = new Array<Integer>();
         if(isP1){
             this.personagem = new Personagem(id, 0, 500); 
@@ -68,6 +68,9 @@ public class Avatar{
             move = Keys.L;
             moves.add(move);
             this.personagem.setMoves(moves);
+        }
+        if(!acertou){
+            this.personagem.tomaDano(this.personagem.getVidaT()/2);
         }
         this.img = this.personagem.getAvatar();
         this.animation = new Animation(new TextureRegion(this.img), 1, 30f);

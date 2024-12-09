@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+
 import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -18,35 +19,22 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-
-
-public class PvpScreen implements Screen {
+public class EndScreen implements Screen{
     final Main game;
-	GameData gameData;
-
-	Texture fundoImage, vida, vidaT;
-	Avatar av1, av2;
-	Personagem p1; 
-	Personagem p2;
+    Texture fundoImage;
+    Personagem pv;
 
     OrthographicCamera camera;
 	SpriteBatch batch;
 	Vector3 touchPos;
 
-    public PvpScreen(final Main passed_game, GameData gameData){
+    public EndScreen(final Main passed_game, Personagem pv, boolean isP1){
         game = passed_game; 
-		this.gameData = gameData;
 
-        av1 = this.gameData.getAvatar(true);
-		av2 = this.gameData.getAvatar(false);
+        this.pv = pv;
+        if(isP1) fundoImage = new Texture(Gdx.files.internal("vitoria.png"));
 
-		p1 = av1.getPersonagem();
-		p2 = av2.getPersonagem();
-
-        fundoImage = new Texture(Gdx.files.internal(this.gameData.getLocal().getImagens().get(0)));
-
-		vidaT = new Texture(Gdx.files.internal("Vermelho.png")); 
-		vida = new Texture(Gdx.files.internal("Verde.png")); 
+        else fundoImage = new Texture(Gdx.files.internal("vitoria2.png"));
 
         // Init the camera objects.
 		camera = new OrthographicCamera();
@@ -55,6 +43,7 @@ public class PvpScreen implements Screen {
 		
 		batch = new SpriteBatch();
     }
+
     @Override
 	public void render(float delta) {
 		/* Clear screen with a dark blue color.
@@ -68,33 +57,11 @@ public class PvpScreen implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 		game.batch.begin();
 
-		game.batch.draw(fundoImage, 0, 200, 1600, 637);
-		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
-		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
-
-		game.batch.draw(vidaT, 300, 600, p1.getVidaT(), 100);
-		game.batch.draw(vida, 300, 600, p1.getVida(), 100);
-
-		game.batch.draw(vidaT, 1000, 600, p2.getVidaT(), 100);
-		game.batch.draw(vida, 1000, 600, p2.getVida(), 100);
-
-		game.batch.draw(p1.getFrame(), p1.getPosx(), p1.getPosy(), p1.getTamx(), p1.getTamy());
-		game.batch.draw(p2.getFrame(), p2.getPosx(), p2.getPosy(), p2.getTamx(), p2.getTamy());
+		game.batch.draw(fundoImage, 300, 0, 1000, 837);
+		game.batch.draw(pv.getAvatar(), 675, 0, 300, 300);
 		
 		game.batch.end();
 
-
-		p1.move(p2);
-		p2.move(p1);
-
-		if(p1.getVida() <= 0){
-			game.setScreen(new EndScreen(game, p1, true));
-			dispose();
-		}
-		else if(p2.getVida() <= 0){
-			game.setScreen(new EndScreen(game, p2, false));
-			dispose();
-		}
 	}
 
 	
@@ -132,4 +99,5 @@ public class PvpScreen implements Screen {
 		// TODO Auto-generated method stub
 		
 	}
+    
 }

@@ -111,11 +111,24 @@ public class QuestionarioScreen implements Screen {
 				if(b.clicou(touchPos.x, touchPos.y)){
 					if(quiz.isRespostaCorreta(b.getIdLocal())){
 						if(this.vezP == 0){
-							av1.setPersonagem(gameData.getLocal().getPersonagem());
+							av1.setPersonagem(gameData.getLocal().getPersonagem(), true);
 							gameData.setAvatar(av1, true, gameData.getLocal().getPersonagem());
 						}
 						else if(this.vezP == 1){
-							av2.setPersonagem(gameData.getLocal().getPersonagem());
+							av2.setPersonagem(gameData.getLocal().getPersonagem(), true);
+							gameData.setAvatar(av2, false, gameData.getLocal().getPersonagem());
+						}
+						gameData.passaVez();
+						game.setScreen(new GameScreen(game, gameData));
+						dispose();
+					}
+					else{
+						if(this.vezP == 0){
+							av1.setPersonagem(gameData.getLocal().getPersonagem(), false);
+							gameData.setAvatar(av1, true, gameData.getLocal().getPersonagem());
+						}
+						else if(this.vezP == 1){
+							av2.setPersonagem(gameData.getLocal().getPersonagem(), false);
 							gameData.setAvatar(av2, false, gameData.getLocal().getPersonagem());
 						}
 						gameData.passaVez();

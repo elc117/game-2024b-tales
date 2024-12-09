@@ -15,10 +15,10 @@ public class GameData {
     }
     public void setAvatar(Avatar av, boolean isp1, int idPersonagem){
         if(isp1){
-            this.av1.setPersonagem(idPersonagem);
+            this.av1.setPersonagem(idPersonagem, true);
         }
         else{
-            this.av2.setPersonagem(idPersonagem);
+            this.av2.setPersonagem(idPersonagem, true);
         }
     }
     public void setLocal(int idLocal){
