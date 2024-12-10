@@ -24,19 +24,15 @@ public class Locais {
                 this.questoes.add(questao);
                 questao = 2;
                 this.questoes.add(questao);
-                questao = 3;
-                this.questoes.add(questao);
                 break;
             case 2:
                 this.nome = "Missoes";
                 img = "Missoes.jpg";
                 this.imagens.add(img);
                 this.personagem = 1;
-                questao = 1;
-                this.questoes.add(questao);
-                questao = 2;
-                this.questoes.add(questao);
                 questao = 3;
+                this.questoes.add(questao);
+                questao = 4;
                 this.questoes.add(questao);
                 break;
             case 3:
@@ -44,11 +40,9 @@ public class Locais {
                 img = "Torres.jpg";
                 this.imagens.add(img);
                 this.personagem = 2;
-                questao = 1;
+                questao = 5;
                 this.questoes.add(questao);
-                questao = 2;
-                this.questoes.add(questao);
-                questao = 3;
+                questao = 6;
                 this.questoes.add(questao);
                 break;
             default:

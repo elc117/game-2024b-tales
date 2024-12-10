@@ -19,35 +19,71 @@ public class Quiz {
                 respostas.add(frase);
                 frase = "q2.png";
                 respostas.add(frase);
-                frase = "q2.png";
+                frase = "q3.png";
                 respostas.add(frase);
-                frase = "q2.png";
+                frase = "q4.png";
                 respostas.add(frase);
                 respostaCorretaIndex = 0;
                 break;
             case 2:
                 pergunta = "p2.png";
-                frase = "q2.png";
+                frase = "q3.png";
                 respostas.add(frase);
                 frase = "q2.png";
                 respostas.add(frase);
                 frase = "q1.png";
+                respostas.add(frase);
+                frase = "q4.png";
+                respostas.add(frase);
+                respostaCorretaIndex = 2;
+                break;
+            case 3:
+                pergunta = "p3.png";
+                frase = "q1.png";
+                respostas.add(frase);
+                frase = "q2.png";
+                respostas.add(frase);
+                frase = "q4.png";
+                respostas.add(frase);
+                frase = "q3.png";
+                respostas.add(frase);
+                respostaCorretaIndex = 1;
+                break;
+            case 4:
+                pergunta = "p4.png";
+                frase = "q1.png";
+                respostas.add(frase);
+                frase = "q4.png";
+                respostas.add(frase);
+                frase = "q3.png";
+                respostas.add(frase);
+                frase = "q2.png";
+                respostas.add(frase);
+                respostaCorretaIndex = 3;
+                break;
+            case 5:
+                pergunta = "p5.png";
+                frase = "q1.png";
+                respostas.add(frase);
+                frase = "q4.png";
+                respostas.add(frase);
+                frase = "q3.png";
                 respostas.add(frase);
                 frase = "q2.png";
                 respostas.add(frase);
                 respostaCorretaIndex = 2;
                 break;
-            case 3:
-                pergunta = "p1.png";
+            case 6:
+                pergunta = "p6.png";
                 frase = "q1.png";
                 respostas.add(frase);
-                frase = "q2.png";
+                frase = "q4.png";
                 respostas.add(frase);
                 frase = "q2.png";
                 respostas.add(frase);
-                frase = "q2.png";
+                frase = "q3.png";
                 respostas.add(frase);
-                respostaCorretaIndex = 0;
+                respostaCorretaIndex = 3;
                 break;
             default:
                 break;

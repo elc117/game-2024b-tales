@@ -98,18 +98,6 @@ public class GameScreen implements Screen {
 				}
 			}
 		}
-		
-		// // Ensure that the bucket's within the screen bounds
-		if (Gdx.input.isKeyPressed(Keys.J)){
-			gameData.setLocal(1);
-			Avatar a = new Avatar(true);
-			Avatar b = new Avatar(false);
-			gameData.setAvatar(a, 1);
-			gameData.setAvatar(b, 2);
-			game.setScreen(new PvpScreen(game, gameData));
-			dispose();
-		}
-		
 	}
 
 	private void createBolinhas(){
