@@ -5,8 +5,6 @@ import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,7 +19,7 @@ import com.badlogic.gdx.utils.Align;
 
 public class Avatar{
     private Texture img;
-    private Integer idPersonagem, vidaTotal, vidaAtual, posx, posy; 
+    private Integer idPersonagem, posx, posy; 
     private Animation animation;
     private Personagem personagem;
     private Boolean isP1;
@@ -29,8 +27,6 @@ public class Avatar{
     public Avatar(boolean isP1){
         this.idPersonagem = 0;
         this.isP1 = isP1;
-        this.vidaTotal = 0;
-        this.vidaAtual = 0;
         this.posy = 837-300;
         if(isP1){
             this.posx = 0;
@@ -41,6 +37,17 @@ public class Avatar{
             this.posx = 1600-300;
         }
         this.animation = new Animation(new TextureRegion(this.img), 2, 30f);
+    }
+
+    public void setAvatar(int id){
+        if(isP1){
+            this.personagem = new Personagem(id, 0, 0); 
+        }
+        else{
+            this.personagem = new Personagem(id, 0, 0); 
+        }
+        this.img = this.personagem.getAvatar();
+        this.animation = new Animation(new TextureRegion(this.img), 1, 30f);
     }
     
     public void setPersonagem(int id, boolean acertou){
@@ -69,9 +76,6 @@ public class Avatar{
             moves.add(move);
             this.personagem.setMoves(moves);
         }
-        if(!acertou){
-            this.personagem.tomaDano(this.personagem.getVidaT()/2);
-        }
         this.img = this.personagem.getAvatar();
         this.animation = new Animation(new TextureRegion(this.img), 1, 30f);
     }
@@ -86,4 +90,5 @@ public class Avatar{
         this.img.dispose();
     }
     public Personagem getPersonagem(){ return this.personagem; }
+    public boolean getIsP1(){ return this.isP1; }
 }

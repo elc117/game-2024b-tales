@@ -23,6 +23,7 @@ public class EndScreen implements Screen{
     final Main game;
     Texture fundoImage;
     Personagem pv;
+	GameData gameData;
 
     OrthographicCamera camera;
 	SpriteBatch batch;
@@ -42,13 +43,12 @@ public class EndScreen implements Screen{
 		touchPos = new Vector3();
 		
 		batch = new SpriteBatch();
+
+		gameData = new GameData();
     }
 
     @Override
 	public void render(float delta) {
-		/* Clear screen with a dark blue color.
-		 * Arguments to ClearColor are r g b, alpha
-		 */
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -61,6 +61,12 @@ public class EndScreen implements Screen{
 		game.batch.draw(pv.getAvatar(), 675, 0, 300, 300);
 		
 		game.batch.end();
+
+		// If player activates the game, dispose of this menu.
+		if (Gdx.input.isTouched()) {
+			game.setScreen(new GameScreen(game, gameData));
+			dispose();
+		}
 
 	}
 

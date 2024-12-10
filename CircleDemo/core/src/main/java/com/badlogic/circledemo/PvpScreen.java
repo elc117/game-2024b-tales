@@ -57,9 +57,6 @@ public class PvpScreen implements Screen {
     }
     @Override
 	public void render(float delta) {
-		/* Clear screen with a dark blue color.
-		 * Arguments to ClearColor are r g b, alpha
-		 */
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -88,11 +85,11 @@ public class PvpScreen implements Screen {
 		p2.move(p1);
 
 		if(p1.getVida() <= 0){
-			game.setScreen(new EndScreen(game, p1, true));
+			game.setScreen(new EndScreen(game, p2, false));
 			dispose();
 		}
 		else if(p2.getVida() <= 0){
-			game.setScreen(new EndScreen(game, p2, false));
+			game.setScreen(new EndScreen(game, p1, true));
 			dispose();
 		}
 	}

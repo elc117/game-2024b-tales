@@ -5,8 +5,6 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,7 +22,6 @@ public class TelaMenu implements Screen {
 	static private int HEIGHT = 837;
 	
 	OrthographicCamera camera;
-
 	GameData gameData;
 	
 	public TelaMenu(final Main passed_game) {
@@ -45,8 +42,8 @@ public class TelaMenu implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 		
 		game.batch.begin();
-		game.font.draw(game.batch, "Welcome to Main!!", 100, 150);
-		game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+		game.font.draw(game.batch, "Bem vindo ao joguinho", 100, 150);
+		game.font.draw(game.batch, "clique para iniciar", 100, 100);
 		game.batch.end();
 		
 		// If player activates the game, dispose of this menu.

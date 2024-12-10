@@ -6,8 +6,6 @@ import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -48,7 +46,6 @@ public class QuestionarioScreen implements Screen {
 
 		quiz = new Quiz(idPergunta);
 
-        // Init the camera objects.
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1600, 837);
 		touchPos = new Vector3();
@@ -61,9 +58,6 @@ public class QuestionarioScreen implements Screen {
 
     @Override
 	public void render(float delta) {
-		/* Clear screen with a dark blue color.
-		 * Arguments to ClearColor are r g b, alpha
-		 */
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -92,14 +86,10 @@ public class QuestionarioScreen implements Screen {
 		pergunta = new Texture(Gdx.files.internal(quiz.getPergunta()));
 		game.batch.draw(pergunta, 450, 480, 700, 200);
 
-		// game.font.draw(game.batch, "Somos uma iniciativa da UFSM emaaaaaaaaaaaaa", 100, 500, 2000, 10, true);
-
 		for(int i=0; i < 4; i++){
 			pergunta = new Texture(Gdx.files.internal(quiz.getRespostas().get(i)));
 			game.batch.draw(pergunta, bolinhas.get(i).getX(), bolinhas.get(i).getY()-70, 700, 200);
 		}
-
-		// game.font.draw(game.batch, "Welcome to Main!!", 100, 150);
 
 		game.batch.end();
 
@@ -111,12 +101,12 @@ public class QuestionarioScreen implements Screen {
 				if(b.clicou(touchPos.x, touchPos.y)){
 					if(quiz.isRespostaCorreta(b.getIdLocal())){
 						if(this.vezP == 0){
-							av1.setPersonagem(gameData.getLocal().getPersonagem(), true);
-							gameData.setAvatar(av1, true, gameData.getLocal().getPersonagem());
+							gameData.getAvatar(true).setPersonagem(gameData.getLocal().getPersonagem(), true);
+							gameData.setPersonagem(av1, gameData.getLocal().getPersonagem());
 						}
 						else if(this.vezP == 1){
-							av2.setPersonagem(gameData.getLocal().getPersonagem(), true);
-							gameData.setAvatar(av2, false, gameData.getLocal().getPersonagem());
+							gameData.getAvatar(false).setPersonagem(gameData.getLocal().getPersonagem(), true);
+							gameData.setPersonagem(av2, gameData.getLocal().getPersonagem());
 						}
 						gameData.passaVez();
 						game.setScreen(new GameScreen(game, gameData));
@@ -124,12 +114,14 @@ public class QuestionarioScreen implements Screen {
 					}
 					else{
 						if(this.vezP == 0){
-							av1.setPersonagem(gameData.getLocal().getPersonagem(), false);
-							gameData.setAvatar(av1, true, gameData.getLocal().getPersonagem());
+							gameData.getAvatar(true).setPersonagem(gameData.getLocal().getPersonagem(), false);
+							gameData.setPersonagem(av1, gameData.getLocal().getPersonagem());
+							gameData.getAvatar(true).getPersonagem().tomaDano(gameData.getAvatar(true).getPersonagem().getVidaT()/2);
 						}
 						else if(this.vezP == 1){
-							av2.setPersonagem(gameData.getLocal().getPersonagem(), false);
-							gameData.setAvatar(av2, false, gameData.getLocal().getPersonagem());
+							gameData.getAvatar(false).setPersonagem(gameData.getLocal().getPersonagem(), false);
+							gameData.setPersonagem(av2, gameData.getLocal().getPersonagem());
+							gameData.getAvatar(false).getPersonagem().tomaDano(gameData.getAvatar(false).getPersonagem().getVidaT()/2);
 						}
 						gameData.passaVez();
 						game.setScreen(new GameScreen(game, gameData));
@@ -155,18 +147,8 @@ public class QuestionarioScreen implements Screen {
 	
 	@Override
 	public void dispose() {
-		// Clear all the "native" resources
 		fundoImage.dispose();
         pergunta.dispose();
-		// av1.dispose();
-		// av2.dispose();
-		// for (Bolinha b : bolinhas) {
-		// 	b.dispose();
-		// }
-		// dropImage.dispose();
-		// bucketImage.dispose();
-		// dropSound.dispose();
-		// rainMusic.dispose();
 		batch.dispose();
 	}
 

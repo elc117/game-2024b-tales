@@ -12,7 +12,6 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		// Use libGDX's default Arial font
 		font = new BitmapFont();
 		this.setScreen(new TelaMenu(this));
 	}

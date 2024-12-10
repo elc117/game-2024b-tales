@@ -1,8 +1,7 @@
 package com.badlogic.circledemo;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.circledemo.Animation;
-import com.badlogic.circledemo.Quadrado;
+import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,7 +19,6 @@ public class Personagem {
     private Animation animation, aniAtack;
     private Texture avatar;
     private Array<Integer> listMoves = new Array<Integer>();
-    private Quadrado area, ataque;
 
     // Construtor que inicializa o Personagem com base no ID
     public Personagem(int id, float posx, float posy) {
@@ -33,28 +31,26 @@ public class Personagem {
                 this.vida = this.vidaT;
                 this.tamx = 600;
                 this.tamy = 300;
-                this.img1 = new String("Bagualossauro1-g.png");
+                this.img1 = new String("Bagualossauro2-g.png");
                 this.imgAva = new String("P1Bag.png");
 
                 t = new Texture(Gdx.files.internal(img1));
 
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
                 this.animation = new Animation(new TextureRegion(t), 2, 10f);
-                this.area = new Quadrado(posx, posy+tamy, posx+tamx, posy);
                 break;
             case 2:
                 this.vidaT = 300;
                 this.vida = this.vidaT;
                 this.tamx = 600;
                 this.tamy = 300;
-                this.img1 = new String("Bagualossauro2-g.png");
+                this.img1 = new String("Bagualossauro1-g.png");
                 this.imgAva = new String("P1BagGaucho.png");
 
                 t = new Texture(Gdx.files.internal(img1));
 
                 this.avatar = new Texture(Gdx.files.internal(imgAva));
                 this.animation = new Animation(new TextureRegion(t), 2, 10f);
-                this.area = new Quadrado(posx, posy+tamy, posx+tamx, posy);
                 break;
             default:
                 break;
@@ -98,26 +94,19 @@ public class Personagem {
         }
         gravity();
         
-        // this.area.conflito(outro.getArea());
     }
 
     public void move_esq(int d){
         this.posx -= d;
-        this.area.moveToEsq(d);
         if(this.posx < 0){
             this.posx += d;
-            this.area.moveToDir(d);
-            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
 
     public void move_dir(int d){
         this.posx += d;
-        this.area.moveToDir(d);
         if(this.posx > 1100){
             this.posx -= d;
-            this.area.moveToEsq(d);
-            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
         }
     }
     public void jump(){
@@ -137,12 +126,12 @@ public class Personagem {
             if (this.whereG == 1) { // Ataque à esquerda
                 if (this.posx >= outro.getPosx() - distanciaMax && this.posx <= outro.getPosx() - distanciaMin) {
                     outro.tomaDano(50);
-                    outro.move_dir(40); // Movimento causado pelo ataque
+                    outro.move_dir(40);
                 }
             } else if (this.whereG == 0) { // Ataque à direita
                 if (this.posx <= outro.getPosx() + distanciaMax && this.posx >= outro.getPosx() + distanciaMin) {
                     outro.tomaDano(50);
-                    outro.move_esq(40); // Movimento causado pelo ataque
+                    outro.move_esq(40); 
                 }
             }
             delayAtack = 0;
@@ -154,11 +143,9 @@ public class Personagem {
     }
     public void gravity(){
         this.posy += this.dy;
-        this.area.moveToUp(this.dy);
         this.dy -= 0.5;
         if(this.posy < this.posyBase){
             this.posy = this.posyBase;
-            this.area.setQuadrado(posx, posy+tamy, posx+tamx, posy);
             this.dy = 0;
         }
     }
@@ -169,12 +156,8 @@ public class Personagem {
     public int getTamy() { return tamy; }
     public int getVida() { return vida; }
     public int getVidaT() { return vidaT; }
-    // public String getImg1() { return img1; }
-//     // public String getImg2() { return img2; }
-//     // public Map<String, Ataque> getAtaques() { return ataques; }
     public Float getPosx() { return this.posx; }
     public Float getPosy() { return this.posy; }
-    public Quadrado getArea() { return this.area; }
     public TextureRegion getFrame(){return this.animation.getFrame();}
     public Texture getAvatar(){ return this.avatar; }
     

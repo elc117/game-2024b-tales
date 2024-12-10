@@ -10,8 +10,6 @@ import com.badlogic.circledemo.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -47,13 +45,11 @@ public class DetalhesScreen implements Screen {
 		av1 = this.gameData.getAvatar(true);
 		av2 = this.gameData.getAvatar(false);
 		
-		// Load images, 64px each
 		fundoImage = new Texture(Gdx.files.internal(local.getImagens().get(0)));
 
 		btSelec = new Botao(0, 100, 200);
 		btVoltar = new Botao(1, 800, 200);
 
-		// Init the camera objects.
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1600, 837);
 		touchPos = new Vector3();
@@ -64,9 +60,6 @@ public class DetalhesScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		/* Clear screen with a dark blue color.
-		 * Arguments to ClearColor are r g b, alpha
-		 */
 		Gdx.gl.glClearColor(0, 0, .2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -91,15 +84,6 @@ public class DetalhesScreen implements Screen {
 		
 		game.batch.end();
 
-		// // Process any user input
-		// if (Gdx.input.isTouched()) {
-		// 	touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-		// 	camera.unproject(touchPos);
-		// 	bucket.x = touchPos.x - bucket.width / 2;
-		// }
-		
-		
-		// // Process any user input
 		if (Gdx.input.isTouched()) {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
@@ -123,53 +107,26 @@ public class DetalhesScreen implements Screen {
 				
 			}
 			else if(btVoltar.clicou(touchPos.x, touchPos.y)){
+				if(this.vezP == 0){
+					gameData.recreateAvatar(av1);
+				}
+				else if(this.vezP == 1){
+					gameData.recreateAvatar(av2);
+				}
+				gameData.setLocal(0);
 				game.setScreen(new GameScreen(game, gameData));
 				dispose();
 			}
 		}
 		
-		// // Ensure that the bucket's within the screen bounds
-		// if (Gdx.input.isKeyPressed(Keys.LEFT)) 
-		// 	bucket.x -= 200 * Gdx.graphics.getDeltaTime();
-		// if (Gdx.input.isKeyPressed(Keys.RIGHT)) 
-		// 	bucket.x += 200 * Gdx.graphics.getDeltaTime();
-		// if (bucket.x < 0) 
-		// 	bucket.x = 0;
-		// if (bucket.x > 800 - bucket.width) 
-		// 	bucket.x = 800 - bucket.width;
-		
-		// // Check time since last raindrop. Do we need another?
-		// if (TimeUtils.nanoTime() - lastDropTime > 1000000000) 
-		// 	spawnRaindrop();
-		
-		// Update all the raindrops
-		// Iterator<Rectangle> iter = raindrops.iterator();
-		// while (iter.hasNext()) {
-		// 	Rectangle raindrop = iter.next();
-		// 	raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
-		// 	if (raindrop.y + raindrop.height < 0) 
-		// 		iter.remove();
-		// 	if (raindrop.overlaps(bucket)) {
-		// 		dropsGathered++;
-		// 		dropSound.play();
-		// 		iter.remove();
-		// 	}
-		// }
 	}
 
 	
 	@Override
 	public void dispose() {
-		// Clear all the "native" resources
 		fundoImage.dispose();
-		// av1.dispose();
-		// av2.dispose();
 		btSelec.dispose();
 		btVoltar.dispose();
-		// dropImage.dispose();
-		// bucketImage.dispose();
-		// dropSound.dispose();
-		// rainMusic.dispose();
 		batch.dispose();
 	}
 

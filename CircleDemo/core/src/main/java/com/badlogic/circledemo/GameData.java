@@ -13,16 +13,33 @@ public class GameData {
         this.av2 = new Avatar(false);
         this.local = new Locais(0);
     }
-    public void setAvatar(Avatar av, boolean isp1, int idPersonagem){
-        if(isp1){
+    public void setAvatar(Avatar av, int id){
+        if(av.getIsP1()){
+            this.av1.setAvatar(id);
+        }
+        else{
+            this.av2.setAvatar(id);
+        }
+    }
+    public void setPersonagem(Avatar av, int idPersonagem){
+        if(av.getIsP1()){
             this.av1.setPersonagem(idPersonagem, true);
         }
         else{
             this.av2.setPersonagem(idPersonagem, true);
         }
     }
+
+    public void recreateAvatar(Avatar av){
+        if(av.getIsP1()){
+            this.av1 = new Avatar(true);
+        }
+        else{
+            this.av2 = new Avatar(false);
+        }
+    }
     public void setLocal(int idLocal){
-        this.local.mudaLocal(idLocal);
+        this.local = new Locais(idLocal);
     }
 
     public Avatar getAvatar(boolean isp1){
