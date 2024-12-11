@@ -24,6 +24,7 @@ public class QuestionarioScreen implements Screen {
 
     Texture fundoImage;
 	Texture pergunta;
+	Array<Texture> respostas;
     Array<Bolinha> bolinhas;
 	Avatar av1, av2;
 	Quiz quiz;
@@ -45,6 +46,12 @@ public class QuestionarioScreen implements Screen {
 		av2 = gameData.getAvatar(false);
 
 		quiz = new Quiz(idPergunta);
+
+		pergunta = new Texture(Gdx.files.internal(quiz.getPergunta()));
+		respostas = new Array<Texture>();
+		for(int i=0; i < 4; i++){
+			respostas.add(new Texture(Gdx.files.internal(quiz.getRespostas().get(i))));
+		}
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1600, 837);
@@ -83,12 +90,10 @@ public class QuestionarioScreen implements Screen {
 		game.batch.draw(av1.getFrame(), av1.getPosx(), av1.getPosy());
 		game.batch.draw(av2.getFrame(), av2.getPosx(), av2.getPosy());
 
-		pergunta = new Texture(Gdx.files.internal(quiz.getPergunta()));
 		game.batch.draw(pergunta, 450, 480, 700, 200);
 
 		for(int i=0; i < 4; i++){
-			pergunta = new Texture(Gdx.files.internal(quiz.getRespostas().get(i)));
-			game.batch.draw(pergunta, bolinhas.get(i).getX(), bolinhas.get(i).getY()-70, 700, 200);
+			game.batch.draw(respostas.get(i), bolinhas.get(i).getX(), bolinhas.get(i).getY()-70, 700, 200);
 		}
 
 		game.batch.end();
@@ -131,6 +136,7 @@ public class QuestionarioScreen implements Screen {
 			}
 		}
 
+        // pergunta.dispose();
 		
 	}
     private void createBolinhas(){
@@ -149,6 +155,9 @@ public class QuestionarioScreen implements Screen {
 	public void dispose() {
 		fundoImage.dispose();
         pergunta.dispose();
+		for(int i=0; i < 4; i++){
+			respostas.get(i).dispose();
+		}
 		batch.dispose();
 	}
 
