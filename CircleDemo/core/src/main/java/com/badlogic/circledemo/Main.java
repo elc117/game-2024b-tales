@@ -25,4 +25,8 @@ public class Main extends Game {
 		batch.dispose();
 		font.dispose();
 	}
+	
+	public int getNumber() {
+	    return 42; // Retorna um número fixo
+	}
 }

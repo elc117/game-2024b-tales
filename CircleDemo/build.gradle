@@ -25,6 +25,13 @@ allprojects {
       testOutputDir file('build/classes/java/test')
     }
   }
+
+  repositories {
+    mavenCentral()
+    google()
+    mavenLocal()
+    maven { url 'https://jitpack.io' }
+  }
 }
 
 configure(subprojects) {
@@ -53,6 +60,11 @@ configure(subprojects) {
 
   compileJava {
     options.incremental = true
+  }
+
+  test {
+    systemProperty "org.lwjgl.librarypath", file("$projectDir/libs").absolutePath
+    systemProperty "com.badlogic.gdx.graphics.glutils.ShaderProgram.pedantic", "false"
   }
 }
 

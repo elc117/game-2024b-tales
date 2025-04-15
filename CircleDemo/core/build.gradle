@@ -3,13 +3,9 @@ eclipse.project.name = appName + '-core'
 
 dependencies {
     implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-    // implementation "com.fasterxml.jackson.core:jackson-core:2.15.2"
-    // implementation "com.fasterxml.jackson.core:jackson-databind:2.15.2"
-    // implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
-    // implementation 'com.google.gwt:gwt-user:2.10.0'
-    // implementation 'com.google.gwt:gwt-dev:2.10.0'
-    // implementation 'com.google.gwt:gwt-user:2.9.0'
-    // implementation 'com.google.gwt:gwt-dev:2.9.0'
+    implementation "com.badlogicgames.gdx:gdx-backend-headless:1.11.0"
+    testImplementation 'junit:junit:4.13.2' // Adiciona o JUnit
+    testImplementation 'org.mockito:mockito-core:4.11.0' // Adiciona o Mockito
 }
 
 sourceSets {
